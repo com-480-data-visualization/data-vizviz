@@ -32,19 +32,7 @@
   </figure>
 </p>
 
-<p align="center">
-  <figure>
-    <img src="img/pendulaire_2_pie_chart.png" width="50%" alt="" />
-    <figcaption> breakdown of means of transport to work in 2023 </figcaption>
-  </figure>
-</p>
 
-<p align="center">
-  <figure>
-    <img src="img/pendulaire_4_histogramme.jpg" width="50%" alt="" />
-    <figcaption>preliminary study : Total number of commuters per canton in 2023  </figcaption>
-  </figure>
-</p>
 
 
 
@@ -82,6 +70,20 @@ Preprocessing OFS datasets starts with the PEND dataset: commuter flows (e.g., 1
 Stats show: PEND reports 60% of commuters use public transport, 35% cars, 5% active modes; mean commute is 14.5 km (std. dev. 18 km), with 70% under 30 minutes. MTMC highlights Zurich’s 25% share of trips, with peak hours at 7-8 AM (20% of daily travel). Rural cantons (e.g., Uri) show 50%+ car use vs. 80% train in Geneva. Yearly data (2018-2022) suggests a 10% public transport drop post-2020.
 
 Insights: Urban centers drive short, transit-heavy commutes; alpine areas favor longer, car-based trips. Temporal peaks strain networks, ideal for flow maps or mode-split charts. Data gaps (e.g., no GPS) limit precision but suit regional visualization.
+
+<p align="center">
+  <figure>
+    <img src="img/pendulaire_2_pie_chart.png" width="50%" alt="" />
+    <figcaption> breakdown of means of transport to work in 2023 </figcaption>
+  </figure>
+</p>
+
+<p align="center">
+  <figure>
+    <img src="img/pendulaire_4_histogramme.jpg" width="50%" alt="" />
+    <figcaption>preliminary study : Total number of commuters per canton in 2023  </figcaption>
+  </figure>
+</p>
 
 ### Related work
 
