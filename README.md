@@ -17,15 +17,15 @@ Switzerland’s daily commuters form the backbone of its mobility system, naviga
 
 We chose OFS datasets because they are collected in Switzerland, offering the most comprehensive and trustworthy data on our topic, and are freely accessible. Currently, we mainly rely on three complementary datasets:
 
-- [Pendulaire 1 dataset] (https://github.com/com-480-data-visualization/data-vizviz/datasets/pendulaire_1.xlsx)
--
--
+
+- Dataset on the number of commuters per canton (2010-2023). Check [here](/datasets/Commuters_per_canton.xlsx).
+- Dataset on commuters' means of transport (1990 + 2000 + 2010-2023).. Check [here](/datasets/Commuters_means_of_transport.xlsx).
+- Dataset on commuters' travel distance and time (1990 + 2000 + 2010-2023). Check [here](/datasets/Commuters_travel_time_distance.xlsx).
 
 We’re also keen to explore additional datasets to enrich our visualizations with correlated insights. Below are potential datasets that could enhance our work:
   
--
--
--
+- Dataset on the proportion of commuters and their types of journeys (2018-2023). Check [here](/datasets/Commuters_overview.xlsx).
+- Dataset on commuters by municipality of residence and municipality of place of work (2010 + 2014 + 2018). Check [here](/datasets/Commuters_communes.xlsx).
 
 The data quality is generally good, as it originates from an official source. However, we need to:
 1.	Harmonize the names of municipalities (some have merged over the years).
