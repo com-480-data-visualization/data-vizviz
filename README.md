@@ -34,7 +34,7 @@
 
 <p align="center">
   <figure>
-    <img src="img/pendulaire_2_pie_chart.jpg" width="50%" alt="" />
+    <img src="img/pendulaire_2_pie_chart.png" width="50%" alt="" />
     <figcaption> breakdown of means of transport to work in 2023 </figcaption>
   </figure>
 </p>
