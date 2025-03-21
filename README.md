@@ -1,5 +1,7 @@
 # Project of Data Visualization (COM-480)
 
+# Swiss Pendulum
+
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Romain Lattion | 347395 |
