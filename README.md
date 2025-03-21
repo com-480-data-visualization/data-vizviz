@@ -13,10 +13,26 @@
 
 <p align="center">
   <figure>
-    <img src="img/Original-Map.png" width="50%" alt="Swiss Commuter Map" />
+    <img src="img/Original-Map.png" width="50%" alt="" />
     <figcaption><a href="https://www.esri.com/arcgis-blog/products/arcgis-online/data-management/pump-up-your-pop-ups-with-arcade-and-the-living-atlas/">Example of map and pop up window. Source: esri</a></figcaption>
   </figure>
 </p>
+
+<p align="center">
+  <figure>
+    <img src="img/demo_15121_none-7.png" width="50%" alt="" />
+    <figcaption><a href="https://www.amcharts.com/demos/bar-chart-race/">Example of bar race chart. Source: AMcharts</a></figcaption>
+  </figure>
+</p>
+
+<p align="center">
+  <figure>
+    <img src="img/map_suisse_example.jpg" width="50%" alt="" />
+    <figcaption><a href="https://www.atlas.bfs.admin.ch/maps/13/fr/17867_17864_3134_3114/27632.html">Example of bar race chart. Source: AMcharts</a></figcaption>
+  </figure>
+</p>
+
+
 
 Switzerland’s pendulaires—daily commuters—form the backbone of its mobility system, navigating a landscape of efficient trains, winding alpine roads, and bustling urban hubs. Using Swiss Federal Statistical Office (OFS) data, our project visualizes these flows, exploring how geography, transport modes, and time shape commuting patterns. We aim to illuminate the rhythms of Swiss life, offering insights for policymakers and a window into pendulaire experiences for all.
 
