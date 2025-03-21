@@ -28,7 +28,21 @@
 <p align="center">
   <figure>
     <img src="img/map_suisse_example.jpg" width="50%" alt="" />
-    <figcaption><a href="https://www.atlas.bfs.admin.ch/maps/13/fr/17867_17864_3134_3114/27632.html">Example of bar race chart. Source: AMcharts</a></figcaption>
+    <figcaption><a href="https://www.atlas.bfs.admin.ch/maps/13/fr/17867_17864_3134_3114/27632.html">Example of a Canton divided Swiss map. Source: BFS</a></figcaption>
+  </figure>
+</p>
+
+<p align="center">
+  <figure>
+    <img src="img/pendulaire_2_pie_chart.jpg" width="50%" alt="" />
+    <figcaption> breakdown of means of transport to work in 2023 </figcaption>
+  </figure>
+</p>
+
+<p align="center">
+  <figure>
+    <img src="img/pendulaire_4_histogramme.jpg" width="50%" alt="" />
+    <figcaption>preliminary study : Total number of commuters per canton in 2023  </figcaption>
   </figure>
 </p>
 
