@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Switzerland Commuting Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; width: 100%; }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background-color: white;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 10px;
+        }
+        #controls select {
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        #controls label {
+            font-size: 14px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <div id="mode-selector">
+            <label for="mode">Select Mode: </label>
+            <select id="mode" onchange="updateMode(this.value)">
+                <option value="arrival">Arrival Cities (Workplace)</option>
+                <option value="departure">Departure Cities (Residence)</option>
+            </select>
+        </div>
+        <div id="year-selector">
+            <label for="year">Select Year: </label>
+            <select id="year" onchange="updateYear(this.value)">
+                <option value="2020">2020</option>
+                <option value="2018">2018</option>
+                <option value="2014">2014</option>
+            </select>
+        </div>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="map.js"></script>
+</body>
+</html>
