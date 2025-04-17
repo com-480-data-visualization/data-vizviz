@@ -17,7 +17,7 @@ let currentMode = 'arrival'; // Default mode: show arrival cities (workplace)
 let currentYear = '2020'; // Default year: 2020
 
 // Load Switzerland GeoJSON to focus the map
-fetch('switzerland.geojson')
+fetch('datasets/switzerland.geojson')
     .then(response => {
         if (!response.ok) {
             throw new Error(`Failed to load switzerland.geojson: ${response.statusText}`);
@@ -25,7 +25,7 @@ fetch('switzerland.geojson')
         return response.json();
     })
     .then(geojson => {
-        console.log('Successfully loaded switzerland.geojson:', geojson);
+        console.log('Successfully loaded datasets/switzerland.geojson:', geojson);
 
         // Add Switzerland's boundaries
         const switzerlandLayer = L.geoJSON(geojson, {
@@ -78,7 +78,7 @@ fetch('switzerland.geojson')
     });
 
 // Load commune coordinates
-fetch('swiss_communes.json')
+fetch('datasets/swiss_communes.json')
     .then(response => {
         if (!response.ok) {
             throw new Error(`Failed to load swiss_communes.json: ${response.statusText}`);
@@ -99,7 +99,7 @@ fetch('swiss_communes.json')
         });
 
         console.log(`Loaded ${Object.keys(communeCoords).length} communes with valid coordinates`);
-        console.log('Commune names in swiss_communes.json:', Object.keys(communeCoords).sort());
+        console.log('Commune names in datasets/swiss_communes.json:', Object.keys(communeCoords).sort());
         loadCommutingData();
     })
     .catch(error => {
@@ -109,7 +109,7 @@ fetch('swiss_communes.json')
 // Load precomputed incoming and outgoing commuters
 function loadCommutingData() {
     // Load incoming commuters (workplace)
-    fetch('incoming_commuters.json')
+    fetch('datasets/incoming_commuters.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Failed to load incoming_commuters.json: ${response.statusText}`);
@@ -120,10 +120,10 @@ function loadCommutingData() {
             console.log('Successfully loaded incoming_commuters.json:', data);
             incomingCommuters = data;
             console.log(`Loaded incoming commuters for ${Object.keys(incomingCommuters).length} workplace communes`);
-            console.log('Commune names in incoming_commuters.json:', Object.keys(incomingCommuters).sort());
+            console.log('Commune names in datasets/incoming_commuters.json:', Object.keys(incomingCommuters).sort());
 
             // Load outgoing commuters (residence)
-            fetch('outgoing_commuters.json')
+            fetch('datasets/outgoing_commuters.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`Failed to load outgoing_commuters.json: ${response.statusText}`);
@@ -134,7 +134,7 @@ function loadCommutingData() {
                     console.log('Successfully loaded outgoing_commuters.json:', data);
                     outgoingCommuters = data;
                     console.log(`Loaded outgoing commuters for ${Object.keys(outgoingCommuters).length} residence communes`);
-                    console.log('Commune names in outgoing_commuters.json:', Object.keys(outgoingCommuters).sort());
+                    console.log('Commune names in datasets/outgoing_commuters.json:', Object.keys(outgoingCommuters).sort());
                     updateMap(); // Initial map rendering
                 })
                 .catch(error => {
