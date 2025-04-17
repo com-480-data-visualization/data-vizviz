@@ -131,7 +131,23 @@ The platform will feature a minimal viable product (MVP) comprising four core vi
 
 ### Tools and Lectures
 
-\[To be filled with specific tools and lectures from the course literature.\]
+## Tools and Reference Lectures
+
+| Visualization | Tools / Libraries *actually used* | Course lectures referenced |
+|---------------|-----------------------------------|----------------------------|
+| **Commuter‑flow map** | • **Leaflet 1.9** (base‑map & proportional circles)  <br>• **JavaScript ES6** (`fetch`, modules) | Maps ▸ Proportional Symbol Map · Maps ▸ Data‑Driven Map · Maps ▸ Flow Map (optional) · Interaction ▸ Navigation |
+| **Canton bar‑chart race** | • **Chart.js 4** (animated bars) <br>• Vanilla JS (play/pause, slider) | Tabular Data ▸ Simple Line Chart · Interaction ▸ Navigation |
+| **Transport‑mode comparison** | • **Chart.js 4** (grouped / stacked bars) <br>• HTML select / checkbox + JS | Tabular Data ▸ Simple Line Chart |
+| **Time‑distance clock** | • **Canvas 2D API** + Vanilla JS (radial bars & hand) <br>• `requestAnimationFrame` | Maps ▸ Contour Map · Interaction ▸ Navigation |
+
+**Cross‑cutting toolkit**
+
+| Purpose | Tool |
+|---------|------|
+| Layout & styling | HTML / CSS (Flexbox & Grid) |
+| Version control & CI/CD | GitHub Pages |
+| Data format | Pre‑aggregated JSON files |
+
 
 ### Breakdown of Visualization Components
 
