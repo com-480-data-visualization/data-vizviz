@@ -123,8 +123,6 @@ Race chart of cantons
 Mode of transportation
 Time and distance
 
-## Milestone 2 (18th April, 5pm)
-
 ### Project Goal
 
 The Swiss Pendulum project aims to create an interactive web-based visualization platform that illustrates the dynamics of commuter mobility across Switzerland, leveraging comprehensive datasets from the Swiss Federal Statistical Office (OFS). Our goal is to provide an engaging and informative experience for researchers, policymakers, and the general public by visualizing commuter flows, transport mode preferences, travel times, and distances across cantons and municipalities from 2010 to 2023. The visualizations will highlight temporal trends, regional disparities, and the interplay between geography and mobility, offering insights into Switzerland’s commuting patterns and their implications for urban planning and transport infrastructure.
