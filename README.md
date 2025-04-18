@@ -5,7 +5,7 @@
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Romain Lattion | 347395 |
-| Jadd Ali Larbi | 327250 |
+| Jadd-Ilyes Ali Larbi | 327250 |
 | Corentin Barut | 329702 |
 
 
