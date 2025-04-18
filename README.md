@@ -123,9 +123,6 @@ The platform will feature four core visualizations: an interactive map, a race c
 | Version control & CI/CD | GitHub Pages (auto‑deploy from main) |
 | Data format | Pre‑aggregated JSON files (loaded via fetch()) |
 
-> No D3.js or Python are required for Milestone 2 – the stack is deliberately lightweight.
-
----
 
 ## What each tool does and why we use it
 
