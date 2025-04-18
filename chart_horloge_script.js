@@ -33,7 +33,7 @@ async function loadData() {
         initializeVisualization();
     } catch (error) {
         console.error('Error loading JSON:', error);
-        errorMessage.textContent = 'Erreur : Impossible de charger les données. Veuillez servir les fichiers via un serveur local (par exemple, python -m http.server).';
+        errorMessage.textContent = 'Error: Unable to load data. Please ensure the data file is available and try again.';
         totalText.textContent = 'Total: N/A';
     }
 }
@@ -232,7 +232,7 @@ function animateArcs(angle) {
 function startAnimation() {
     if (!isPlaying) {
         if (!data) {
-            errorMessage.textContent = 'Erreur : Données non chargées. Veuillez vérifier le fichier JSON.';
+            errorMessage.textContent = 'Error: Data not loaded. Please check the JSON file.';
             return;
         }
         isPlaying = true;
