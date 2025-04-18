@@ -143,6 +143,13 @@ The platform will feature four core visualizations: an interactive map, a race c
 
 An interactive map displaying Swiss cities as dots, with dot radius proportional to the number of incoming and outgoing commuters. Users can select a departure and arrival city to view detailed journey information, including commuter volume, drawn from the OFS datasets (`Commuters_per_canton.xlsx`, `Commuters_communes.xlsx`).
 
+<p align="center">
+  <figure>
+    <img src="img/Maps-1-dots.jpg" width="50%" alt="" />
+    <figcaption>Breakdown of means of transport to work in 2023 </figcaption>
+  </figure>
+</p>
+
 **Implementation Details**:
 
 - **Data**: Aggregated commuter counts by municipality and canton, harmonized to account for municipal mergers.
@@ -161,6 +168,13 @@ An interactive map displaying Swiss cities as dots, with dot radius proportional
 
 A dynamic “bar chart race” visualizing the ranking of cantons by total commuter volume from 2010 to 2023, using data from `Commuters_per_canton.xlsx`. The chart will animate yearly changes, highlighting shifts in commuter activity across Switzerland.
 
+<p align="center">
+  <figure>
+    <img src="img/Race Chart.jpg" width="50%" alt="" />
+    <figcaption>Breakdown of means of transport to work in 2023 </figcaption>
+  </figure>
+</p>
+
 **Implementation Details**:
 
 - **Data**: Yearly commuter counts per canton, preprocessed for consistency.
@@ -177,6 +191,13 @@ A dynamic “bar chart race” visualizing the ranking of cantons by total commu
 #### 3. Transport Mode Comparison
 
 A bar chart displaying the distribution of transport modes (e.g., car, train, bike) used by commuters in 2023, sourced from `Commuters_means_of_transport.xlsx`. Users can select multiple modes to compare their shares side-by-side in a standard bar or stacked bar chart.
+
+<p align="center">
+  <figure>
+    <img src="img/Transport modes comparaison.jpg" width="50%" alt="" />
+    <figcaption>Breakdown of means of transport to work in 2023 </figcaption>
+  </figure>
+</p>
 
 **Implementation Details**:
 
@@ -195,6 +216,13 @@ A bar chart displaying the distribution of transport modes (e.g., car, train, bi
 #### 4. Time and Distance Clock
 
 A clock-based visualization representing commuter travel time and distance, using data from `Commuters_travel_time_distance.xlsx`. Travel time buckets (e.g., 0–15 min, 15–30 min) are mapped to a circular clock, with a needle sweeping from 0 to 360 degrees. An outer ring grows radially to represent the number of commuters in each time bucket, resetting at the start of each bucket.
+
+<p align="center">
+  <figure>
+    <img src="img/Time Distance.jpg" width="50%" alt="" />
+    <figcaption>Breakdown of means of transport to work in 2023 </figcaption>
+  </figure>
+</p>
 
 **Implementation Details**:
 
