@@ -108,7 +108,37 @@ The platform will feature four core visualizations: an interactive map, a race c
 
 ### Tools and Lectures
 
-\[To be filled with specific tools and lectures from the course literature.\]
+| Visualization | Tools / Libraries actually used | Course lectures referenced |
+|---------------|-----------------------------------|----------------------------|
+| *Commuter‑flow map* | • *Leaflet 1.9* (base‑map & proportional circles)  <br>• *JavaScript ES6* (fetch, modules) | Maps ▸ Proportional Symbol Map · Maps ▸ Data‑Driven Map · Maps ▸ Flow Map (optional) · Interaction ▸ Navigation |
+| *Canton bar‑chart race* | • *Chart.js 4* (animated bars) <br>• Vanilla JS (play/pause, slider) | Tabular Data ▸ Simple Line Chart · Interaction ▸ Navigation |
+| *Transport‑mode comparison* | • *Chart.js 4* (grouped / stacked bars) <br>• HTML select / checkbox + JS | Tabular Data ▸ Simple Line Chart |
+| *Time‑distance clock* | • *Canvas 2D API* + Vanilla JS (radial bars & hand) <br>• requestAnimationFrame | Maps ▸ Contour Map · Interaction ▸ Navigation |
+
+*Cross‑cutting toolkit*
+
+| Purpose | Tool |
+|---------|------|
+| Layout & styling | HTML / CSS (Flexbox & Grid) |
+| Version control & CI/CD | GitHub Pages (auto‑deploy from main) |
+| Data format | Pre‑aggregated JSON files (loaded via fetch()) |
+
+> No D3.js or Python are required for Milestone 2 – the stack is deliberately lightweight.
+
+---
+
+## What each tool does and why we use it
+
+| Tool | What it is | Why we need it in the project |
+|------|------------|------------------------------|
+| *Leaflet 1.9* | Small open‑source JS library for interactive maps (panning, zooming, tile layers, vector overlays). | Renders Swiss communes as circles whose radius = commuter count; keeps the map smooth on all devices. |
+| *Chart.js 4* | Canvas‑based chart library with built‑in animations and a simple declarative API. | Fast to set up bar‑chart races and mode‑share bars without the overhead of D3. |
+| *Vanilla JavaScript (ES6)* | Modern JS features (let/const, arrow functions, template literals, modules). | All page logic (JSON loading, UI events, chart updates) is written in straightforward, framework‑free code. |
+| *Canvas 2D API* | Low‑level drawing context of the <canvas> element. | Perfect for the custom radial “clock” where SVG would be verbose; gives fluid animation. |
+| **requestAnimationFrame** | Browser method that syncs a callback with the next repaint. | Provides a jitter‑free loop for animating chart‑race bars and the clock hand. |
+| *HTML / CSS (Flexbox, Grid)* | Core web standards for structure and responsive layout. | Ensures the site looks good on laptop or mobile without extra CSS frameworks. |
+| *GitHub Pages* | Static hosting directly from the repository with automatic rebuild on push. | Free continuous deployment and a shareable prototype URL for reviewers. |
+| *JSON (pre‑processed)* | Lightweight data‑interchange format parsed natively by browsers. | All commuter counts are shipped as static JSON; no server or Python needed. 
 
 ### Breakdown of Visualization Components
 
