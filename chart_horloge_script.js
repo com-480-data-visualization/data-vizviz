@@ -25,7 +25,7 @@ const errorMessage = document.getElementById('error-message');
 // Fetch JSON data
 async function loadData() {
     try {
-        const response = await fetch('./pendulaire_3_json.json');
+        const response = await fetch('./datasets/pendulaire_3_json.json');
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
