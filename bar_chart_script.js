@@ -1,95 +1,73 @@
-// Pictograms for each transport mode
+// Pictogrammes pour chaque mode de transport
 const transportIcons = {
-    "on foot": "🚶",
-    "bicycle": "🚲",
-    "electric bicycle": "🔋🚲",
-    "motorized two-wheeler (excluding electric bicycle)": "🏍",
-    "car": "🚗",
-    "public road transport": "🚌",
+    "à pied": "🚶",
+    "vélo": "🚲",
+    "vélo éléctrique": "🔋🚲",
+    "deux-roues motorisé (sans vélo électrique)": "🏍",
+    "voiture": "🚗",
+    "transports publics routiers": "🚌",
     "train": "🚆",
-    "other transport modes": "❓",
-    "commuters with unknown primary transport mode": "�"
+    "autres moyens de transport": "❓",
+    "Pendulaires dont le principal moyen de transport n'est pas connu": "�"
 };
 
-// Colors for different transport modes
+// Couleurs pour les différents modes de transport
 const transportColors = {
-    "on foot": "#3498db",
-    "bicycle": "#2ecc71",
-    "electric bicycle": "#1abc9c",
-    "motorized two-wheeler (excluding electric bicycle)": "#e74c3c",
-    "car": "#f39c12",
-    "public road transport": "#9b59b6",
+    "à pied": "#3498db",
+    "vélo": "#2ecc71",
+    "vélo éléctrique": "#1abc9c",
+    "deux-roues motorisé (sans vélo électrique)": "#e74c3c",
+    "voiture": "#f39c12",
+    "transports publics routiers": "#9b59b6",
     "train": "#34495e",
-    "other transport modes": "#7f8c8d"
+    "autres moyens de transport": "#7f8c8d"
 };
 
-// Function to format numbers
+// Fonction pour formater les nombres
 function formatNumber(num) {
-    if (num === null || isNaN(num) || num === undefined) return "N/A";
-    return num.toLocaleString('en-CH', { maximumFractionDigits: 0 }); // No rounding, preserve precision
+    if (num === null || isNaN(num)) return "N/A";
+    return Math.round(num).toLocaleString('fr-CH');
 }
 
-// Function to create the main chart
+// Fonction pour créer le graphique principal
 function createChart() {
     const chartContainer = document.getElementById('chart');
     chartContainer.innerHTML = '';
-
-    // Debug: Log the dataset to verify values
-    console.log('pendulaireData:', pendulaireData);
     
-    // Map French mode names to English for display
-    const modeNameMap = {
-        "à pied": "on foot",
-        "vélo": "bicycle",
-        "vélo éléctrique": "electric bicycle",
-        "deux-roues motorisé (sans vélo électrique)": "motorized two-wheeler (excluding electric bicycle)",
-        "voiture": "car",
-        "transports publics routiers": "public road transport",
-        "train": "train",
-        "autres moyens de transport": "other transport modes",
-        "Pendulaires dont le principal moyen de transport n'est pas connu": "commuters with unknown primary transport mode"
-    };
-
-    // Exclude total and unknown data
+    // Exclure le total et les données non connues
     const displayModes = pendulaireData.transport_modes.filter(mode => 
         mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
         mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
     );
     
-    // Find the maximum value for scaling
-    const maxValue = pendulaireData.values["voiture"]["2023"]?.pourcentage || 100;
+    // Trouver la valeur maximale pour l'échelle
+    const maxValue = pendulaireData.values["voiture"]["2023"].pourcentage;
     
     displayModes.forEach(mode => {
         const data = pendulaireData.values[mode]["2023"];
-        const percentage = data?.pourcentage || 0;
-        const nombre = data?.nombre || 0;
-
-        // Debug: Log each mode's data and warn if invalid
-        console.log(`Mode: ${mode}, Percentage: ${percentage}, Nombre: ${nombre}`);
-        if (!data || nombre === 0 || isNaN(nombre)) {
-            console.warn(`Invalid or missing data for mode: ${mode} in 2023`);
-        }
+        const percentage = data.pourcentage;
+        const nombre = data.nombre;
         
         const barContainer = document.createElement('div');
         barContainer.className = 'bar-container';
         barContainer.setAttribute('data-mode', mode);
         
-        // Transport label (use English name)
+        // Label du transport
         const label = document.createElement('div');
         label.className = 'transport-label';
-        label.textContent = modeNameMap[mode] || mode;
+        label.textContent = mode;
         
-        // Transport icon (positioned absolutely)
+        // Icône du transport (positionné absolument)
         const icon = document.createElement('div');
         icon.className = 'transport-icon';
-        icon.innerHTML = transportIcons[modeNameMap[mode]] || '';
-        icon.style.color = transportColors[modeNameMap[mode]] || '#3498db';
+        icon.innerHTML = transportIcons[mode] || '';
+        icon.style.color = transportColors[mode] || '#3498db';
         
-        // Wrapper for the bar
+        // Wrapper pour la barre
         const barWrapper = document.createElement('div');
         barWrapper.className = 'bar-wrapper';
         
-        // Progress bar
+        // Barre de progression
         const bar = document.createElement('div');
         bar.className = 'bar';
         
@@ -98,14 +76,9 @@ function createChart() {
         barFill.style.width = '0%';
         barFill.setAttribute('data-percentage', percentage);
         barFill.setAttribute('data-value', nombre);
-        barFill.style.backgroundColor = transportColors[modeNameMap[mode]] || '#3498db';
+        barFill.style.backgroundColor = transportColors[mode] || '#3498db';
         
-        // Number display
-        const numberEl = document.createElement('div');
-        numberEl.className = 'number';
-        numberEl.textContent = '0';
-        
-        // Percentage
+        // Pourcentage
         const percentageEl = document.createElement('div');
         percentageEl.className = 'percentage';
         percentageEl.textContent = '0%';
@@ -113,73 +86,64 @@ function createChart() {
         bar.appendChild(barFill);
         barWrapper.appendChild(bar);
         barContainer.appendChild(label);
-        barContainer.appendChild(icon);
+        barContainer.appendChild(icon);  // Icône après le label
         barContainer.appendChild(barWrapper);
         barContainer.appendChild(percentageEl);
-        barContainer.appendChild(numberEl);
         
         chartContainer.appendChild(barContainer);
         
-        // Add click event to open modal
+        // Ajouter l'événement click pour ouvrir le modal
         barContainer.addEventListener('click', function() {
             openComparisonModal(mode);
         });
     });
 }
 
-// Function to animate the bars with pictograms
+// Fonction pour animer les barres avec les pictogrammes
 function animateBars() {
     const bars = document.querySelectorAll('.bar-fill');
     const icons = document.querySelectorAll('.transport-icon');
-    const percentages = document.querySelectorAll('.percentage');
-    const numbers = document.querySelectorAll('.number');
     let delay = 0;
     
     bars.forEach((bar, index) => {
         setTimeout(() => {
-            const percentage = parseFloat(bar.getAttribute('data-percentage')) || 0;
-            const value = parseFloat(bar.getAttribute('data-value')) || 0;
+            const percentage = bar.getAttribute('data-percentage');
+            const value = bar.getAttribute('data-value');
             
-            // Debug: Log animation values
-            console.log(`Animating bar ${index}: Percentage: ${percentage}, Value: ${value}`);
-            
-            // Calculate final icon position
+            // Calculer la position finale de l'icône
             const barWidth = bar.parentElement.offsetWidth;
-            const fillWidth = barWidth * (percentage / 100);
+            const fillWidth = barWidth * percentage / 100;
             
-            // Animate icon (start at left of bar)
+            // Animer l'icône (départ à gauche de la barre)
             icons[index].style.transform = `translateX(${fillWidth}px)`;
             
-            // Animate bar
+            // Animer la barre
             bar.style.width = percentage + '%';
+            bar.textContent = formatNumber(value);
             
-            // Update percentage and number display
-            percentages[index].textContent = percentage.toFixed(1) + '%';
-            numbers[index].textContent = formatNumber(value);
+            // Mettre à jour le pourcentage affiché
+            const percentageEl = bar.parentElement.parentElement.nextElementSibling;
+            percentageEl.textContent = parseFloat(percentage).toFixed(1) + '%';
             
         }, delay);
         
-        delay += 800; // Delay between each animation
+        delay += 800; // Délai entre chaque animation
     });
 }
 
-// Function to reset the animation
+// Fonction pour réinitialiser l'animation
 function resetAnimation() {
     const bars = document.querySelectorAll('.bar-fill');
     const percentages = document.querySelectorAll('.percentage');
-    const numbers = document.querySelectorAll('.number');
     const icons = document.querySelectorAll('.transport-icon');
     
     bars.forEach(bar => {
         bar.style.width = '0%';
+        bar.textContent = '';
     });
     
     percentages.forEach(p => {
         p.textContent = '0%';
-    });
-    
-    numbers.forEach(n => {
-        n.textContent = '0';
     });
     
     icons.forEach(icon => {
@@ -187,7 +151,7 @@ function resetAnimation() {
     });
 }
 
-// Functions for the comparison modal
+// Fonctions pour le modal de comparaison
 let comparisonChart = null;
 const selectedTransports = new Set();
 
@@ -195,24 +159,11 @@ function openComparisonModal(initialMode) {
     const modal = document.getElementById('comparisonModal');
     const selector = document.getElementById('transportSelector');
     
-    // Map French mode names to English
-    const modeNameMap = {
-        "à pied": "on foot",
-        "vélo": "bicycle",
-        "vélo éléctrique": "electric bicycle",
-        "deux-roues motorisé (sans vélo électrique)": "motorized two-wheeler (excluding electric bicycle)",
-        "voiture": "car",
-        "transports publics routiers": "public road transport",
-        "train": "train",
-        "autres moyens de transport": "other transport modes",
-        "Pendulaires dont le principal moyen de transport n'est pas connu": "commuters with unknown primary transport mode"
-    };
-    
-    // Reset selector
+    // Réinitialiser le sélecteur
     selector.innerHTML = '';
     selectedTransports.clear();
     
-    // Add transport options
+    // Ajouter les options de transport
     pendulaireData.transport_modes.forEach(mode => {
         if (mode === "Total des pendulaires dont le principal moyen de transport est connu" || 
             mode === "Pendulaires dont le principal moyen de transport n'est pas connu") {
@@ -221,8 +172,8 @@ function openComparisonModal(initialMode) {
         
         const option = document.createElement('div');
         option.className = 'transport-option';
-        option.textContent = modeNameMap[mode] || mode;
-        option.style.border = `2px solid ${transportColors[modeNameMap[mode]] || '#3498db'}`;
+        option.textContent = mode;
+        option.style.border = `2px solid ${transportColors[mode] || '#3498db'}`;
         option.setAttribute('data-mode', mode);
         
         if (mode === initialMode) {
@@ -245,10 +196,10 @@ function openComparisonModal(initialMode) {
         selector.appendChild(option);
     });
     
-    // Show modal
+    // Afficher le modal
     modal.style.display = 'flex';
     
-    // Update chart
+    // Mettre à jour le graphique
     updateComparisonChart();
 }
 
@@ -258,33 +209,20 @@ function closeComparisonModal() {
 
 function updateComparisonChart() {
     const ctx = document.getElementById('comparisonChart').getContext('2d');
-    const years = pendulaireData.years.filter(y => y !== "199 بساطة").concat(["1990", "2000"]);
-    
-    // Map French mode names to English
-    const modeNameMap = {
-        "à pied": "on foot",
-        "vélo": "bicycle",
-        "vélo éléctrique": "electric bicycle",
-        "deux-roues motorisé (sans vélo électrique)": "motorized two-wheeler (excluding electric bicycle)",
-        "voiture": "car",
-        "transports publics routiers": "public road transport",
-        "train": "train",
-        "autres moyens de transport": "other transport modes",
-        "Pendulaires dont le principal moyen de transport n'est pas connu": "commuters with unknown primary transport mode"
-    };
+    const years = pendulaireData.years.filter(y => y !== "1990" && y !== "2000").concat(["1990", "2000"]);
     
     const datasets = Array.from(selectedTransports).map(mode => {
         return {
-            label: modeNameMap[mode] || mode,
+            label: mode,
             data: years.map(year => {
                 const val = pendulaireData.values[mode][year]?.pourcentage;
                 return val !== null && !isNaN(val) ? val : 0;
             }),
-            borderColor: transportColors[modeNameMap[mode]] || '#3498db',
+            borderColor: transportColors[mode] || '#3498db',
             backgroundColor: 'rgba(255, 255, 255, 0)',
             borderWidth: 3,
             tension: 0.1,
-            pointBackgroundColor: transportColors[modeNameMap[mode]] || '#3498db',
+            pointBackgroundColor: transportColors[mode] || '#3498db',
             pointRadius: 5,
             pointHoverRadius: 7
         };
@@ -308,20 +246,20 @@ function updateComparisonChart() {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Percentage (%)'
+                        text: 'Pourcentage (%)'
                     }
                 },
                 x: {
                     title: {
                         display: true,
-                        text: 'Year'
+                        text: 'Année'
                     }
                 }
             },
             plugins: {
                 title: {
                     display: true,
-                    text: 'Evolution of Transport Modes',
+                    text: 'Évolution des moyens de transport',
                     font: {
                         size: 18
                     }
@@ -335,7 +273,7 @@ function updateComparisonChart() {
                             const nombre = pendulaireData.values[mode][year]?.nombre;
                             return [
                                 `${mode}: ${value.toFixed(1)}%`,
-                                `Number: ${formatNumber(nombre)}`
+                                `Nombre: ${formatNumber(nombre)}`
                             ];
                         }
                     }
@@ -345,14 +283,14 @@ function updateComparisonChart() {
     });
 }
 
-// Initialization
+// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
     createChart();
     
     document.getElementById('animateBtn').addEventListener('click', animateBars);
     document.getElementById('resetBtn').addEventListener('click', resetAnimation);
     
-    // Modal management
+    // Gestion du modal
     document.querySelector('.close-modal').addEventListener('click', closeComparisonModal);
     document.getElementById('comparisonModal').addEventListener('click', function(e) {
         if (e.target === this) {
