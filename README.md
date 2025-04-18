@@ -235,6 +235,7 @@ A clock-based visualization representing commuter travel time and distance, usin
 
 We have developed an initial website prototype that serves as the skeleton for our visualization platform. the prototype includes 3 animations for the moment (which are not the final visualizations but just to show what we're trying to achieve). First, the map with the departure and arrival cities. To improve visibility, only 20 cities are displayed at any one time, and as you zoom in on the map, other cities with fewer departures or arrivals appear. The second animation is the bar chart with the most popular means of transport. When you click on one of the means of transport, a pop-up window opens showing the evolution of this means of transport over time, and you can also compare it with other means of transport. Finally, the last animation shows the number of people as a function of travel time.
 
+the site can be found with the link : https://com-480-data-visualization.github.io/data-vizviz/
 
 ## Milestone 3 (30th May, 5pm)
 
