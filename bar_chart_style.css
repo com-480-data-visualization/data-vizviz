@@ -47,7 +47,7 @@ h1 {
     justify-content: center;
     font-size: 24px;
     position: absolute;
-    left: 300px; /* Positionné après le label */
+    left: 300px; /* Positioned after the label */
     z-index: 2;
     transition: transform 1.5s ease-out;
     transform: translateX(0);
@@ -62,7 +62,7 @@ h1 {
 .bar-wrapper {
     flex-grow: 1;
     position: relative;
-    margin-left: 40px; /* Espace pour l'icône */
+    margin-left: 40px; /* Space for the icon */
 }
 
 .bar {
@@ -93,6 +93,15 @@ h1 {
     width: 60px;
     text-align: right;
     font-weight: bold;
+}
+
+.number {
+    margin-left: 10px;
+    width: 100px; /* Wider to accommodate large numbers */
+    text-align: right;
+    font-weight: bold;
+    color: #8B0000; /* Match site’s dark red */
+    font-size: 14px;
 }
 
 .controls {
