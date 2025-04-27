@@ -34,7 +34,6 @@ fetch('datasets/switzerland.geojson')
                 weight: 3, // Thicker border
                 opacity: 1,
                 color: 'black', // Black border
-                fillOpacity: 0.5 // Slightly transparent fill
             }
         }).addTo(map);
 
