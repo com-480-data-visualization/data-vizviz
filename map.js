@@ -30,7 +30,7 @@ fetch('datasets/switzerland.geojson')
         // Add Switzerland's boundaries
         const switzerlandLayer = L.geoJSON(geojson, {
             style: {
-                fillColor: '#d3d3d3', // Light gray fill
+                fillColor: 'transparent',
                 weight: 3, // Thicker border
                 opacity: 1,
                 color: 'black', // Black border
