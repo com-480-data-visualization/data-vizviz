@@ -32,7 +32,7 @@ fetch('datasets/switzerland.geojson')
             style: {
                 fillColor: 'transparent',
                 weight: 3, // Thicker border
-                opacity: 1,
+                opacity: 0,
                 color: 'black', // Black border
                 fillOpacity: 0
             }
