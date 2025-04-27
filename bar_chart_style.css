@@ -39,18 +39,27 @@ h1 {
 }
 
 .transport-icon {
-    width: 40px;
+    width: auto; /* Laisser la largeur s'ajuster au contenu */
     height: 40px;
     margin-right: 15px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Aligner à gauche */
     font-size: 24px;
     position: absolute;
     left: 300px; /* Positionné après le label */
     z-index: 2;
     transition: transform 1.5s ease-out;
     transform: translateX(0);
+    white-space: nowrap; /* Empêcher le retour à la ligne */
+}
+
+/* Style pour le nombre à côté de l'emoji */
+.transport-icon .number {
+    margin-left: 5px; /* Espace entre l'emoji et le nombre */
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Couleur du texte */
 }
 
 .transport-label {
