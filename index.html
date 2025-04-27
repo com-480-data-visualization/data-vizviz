@@ -165,10 +165,10 @@
 
         // Pictogrammes pour chaque mode de transport
         const transportIcons = {
-            "à pied": "🚶",
-            "velo": "🚲", // Normalisé pour correspondre à pendulaire_2_js_v3.js
-            "velo electrique": "🔋🚲", // Normalisé
-            "deux-roues motorise (sans velo electrique)": "🏍", // Normalisé
+            "a pied": "🚶",
+            "velo": "🚲",
+            "velo electrique": "🔋🚲",
+            "deux-roues motorise (sans velo electrique)": "🏍",
             "voiture": "🚗",
             "transports publics routiers": "🚌",
             "train": "🚆",
@@ -212,6 +212,8 @@
                 const data = pendulaireData.values[mode]["2023"];
                 const percentage = data.pourcentage;
                 const nombre = data.nombre;
+                
+                console.log('Setting data-percentage for mode', mode, 'to', percentage); // Débogage
                 
                 const barContainer = document.createElement('div');
                 barContainer.className = 'bar-container';
@@ -284,13 +286,15 @@
                         console.warn(`Mode "${mode}" (normalized: "${normalizedMode}") non trouvé dans transportIcons`);
                     }
                     
-                    const percentage = bar.getAttribute('data-percentage');
+                    const percentage = parseFloat(bar.getAttribute('data-percentage'));
                     const value = bar.getAttribute('data-value');
                     const formattedValue = formatNumber(value);
                     
+                    console.log('Setting width for bar:', percentage + '%'); // Débogage
+                    
                     // Calculer la position finale de l'icône
                     const barWidth = bar.parentElement.offsetWidth;
-                    const fillWidth = barWidth * percentage / 100;
+                    const fillWidth = barWidth * (percentage / 100);
                     
                     // Ajouter l'emoji et le nombre à l'icône
                     if (emoji) {
@@ -303,7 +307,7 @@
                     // Animer l'icône à la position finale
                     icons[index].style.transform = `translateX(${fillWidth}px)`;
                     
-                    // Animer la barre sans le nombre
+                    // Animer la barre
                     bar.style.width = percentage + '%';
                     bar.textContent = ''; // Supprimer le nombre de la barre
                     
