@@ -263,7 +263,16 @@
             
             bars.forEach((bar, index) => {
                 setTimeout(() => {
+                    // Récupérer le mode à partir de l'attribut data-mode
                     const mode = bar.parentElement.parentElement.getAttribute('data-mode');
+                    console.log('Mode during animation:', mode); // Débogage
+                    
+                    // Vérifier si le mode existe dans transportIcons
+                    if (!transportIcons[mode]) {
+                        console.error(`Mode "${mode}" non trouvé dans transportIcons`);
+                        return; // Arrêter si le mode n'est pas valide
+                    }
+                    
                     const percentage = bar.getAttribute('data-percentage');
                     const value = bar.getAttribute('data-value');
                     const formattedValue = formatNumber(value);
@@ -273,7 +282,7 @@
                     const fillWidth = barWidth * percentage / 100;
                     
                     // Ajouter l'emoji et le nombre à l'icône
-                    const emoji = transportIcons[mode] || '❓';
+                    const emoji = transportIcons[mode];
                     icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
                     
                     // Animer l'icône à la position finale
@@ -328,5 +337,5 @@
     <!-- Custom Script -->
     <script src="website_script.js"></script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'936fb0405c4ebccc',t:'MTc0NTc3MTI1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'936fec7f8c78b0a0',t:'MTc0NTc3MzcyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
