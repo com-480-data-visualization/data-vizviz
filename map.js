@@ -29,14 +29,14 @@ fetch('datasets/switzerland.geojson')
 
         // Add Switzerland's boundaries
         const switzerlandLayer = L.geoJSON(geojson, {
-            style: {
-                fillColor: 'transparent',
-                weight: 3, // Thicker border
-                opacity: 0,
-                color: 'black', // Black border
-                fillOpacity: 0
-            }
-        }).addTo(map);
+        style: {
+            fillColor: 'transparent', // Pas de remplissage
+            weight: 3, // Contour épais
+            opacity: 1, // Garde le contour visible
+            color: 'black', // Contour noir
+            fillOpacity: 0 // Pas de remplissage
+        }
+    }).addTo(map);
 
         // Fit the map to Switzerland's bounds
         const bounds = switzerlandLayer.getBounds();
