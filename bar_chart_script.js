@@ -23,10 +23,10 @@ const transportColors = {
     "autres moyens de transport": "#7f8c8d"
 };
 
-// Fonction pour formater les nombres
+// Fonction pour formater les nombres sans virgules
 function formatNumber(num) {
     if (num === null || isNaN(num)) return "N/A";
-    return Math.round(num).toLocaleString('fr-CH');
+    return Math.round(num).toString(); // Retourne le nombre sans formattage
 }
 
 // Fonction pour créer le graphique principal
@@ -109,17 +109,22 @@ function animateBars() {
         setTimeout(() => {
             const percentage = bar.getAttribute('data-percentage');
             const value = bar.getAttribute('data-value');
+            const formattedValue = formatNumber(value); // Nombre sans virgules
             
             // Calculer la position finale de l'icône
             const barWidth = bar.parentElement.offsetWidth;
             const fillWidth = barWidth * percentage / 100;
             
-            // Animer l'icône (départ à gauche de la barre)
+            // Ajouter l'emoji et le nombre à l'icône
+            const mode = bar.parentElement.parentElement.getAttribute('data-mode');
+            icons[index].innerHTML = `${transportIcons[mode]} <span class="number">${formattedValue}</span>`;
+            
+            // Animer l'icône à la position finale
             icons[index].style.transform = `translateX(${fillWidth}px)`;
             
-            // Animer la barre
+            // Animer la barre sans le nombre
             bar.style.width = percentage + '%';
-            bar.textContent = formatNumber(value);
+            bar.textContent = ''; // Supprimer le nombre de la barre
             
             // Mettre à jour le pourcentage affiché
             const percentageEl = bar.parentElement.parentElement.nextElementSibling;
