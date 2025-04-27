@@ -143,7 +143,7 @@ function resetAnimation() {
     const icons = document.querySelectorAll('.transport-icon');
     
     bars.forEach(bar => {
-        bar.style.width = percentage + '%';
+        bar.style.width = '0%';
         bar.textContent = '';
     });
     
