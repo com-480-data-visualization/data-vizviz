@@ -158,7 +158,7 @@
         const transportIcons = {
             "à pied": "🚶",
             "vélo": "🚲",
-            "vélo éléctrique": "🔋🚲",
+            "vélo électrique": "🔋🚲", // Corrigé pour correspondre à pendulaire_2_js_v3.js
             "deux-roues motorisé (sans vélo électrique)": "🏍",
             "voiture": "🚗",
             "transports publics routiers": "🚌",
@@ -171,7 +171,7 @@
         const transportColors = {
             "à pied": "#3498db",
             "vélo": "#2ecc71",
-            "vélo éléctrique": "#1abc9c",
+            "vélo électrique": "#1abc9c",
             "deux-roues motorisé (sans vélo électrique)": "#e74c3c",
             "voiture": "#f39c12",
             "transports publics routiers": "#9b59b6",
@@ -267,10 +267,10 @@
                     const mode = bar.parentElement.parentElement.getAttribute('data-mode');
                     console.log('Mode during animation:', mode); // Débogage
                     
-                    // Vérifier si le mode existe dans transportIcons
+                    // Vérifier si le mode existe dans transportIcons, sinon utiliser un emoji par défaut
+                    const emoji = transportIcons[mode] || '❓';
                     if (!transportIcons[mode]) {
-                        console.error(`Mode "${mode}" non trouvé dans transportIcons`);
-                        return; // Arrêter si le mode n'est pas valide
+                        console.warn(`Mode "${mode}" non trouvé dans transportIcons, utilisation de l'emoji par défaut : ${emoji}`);
                     }
                     
                     const percentage = bar.getAttribute('data-percentage');
@@ -282,7 +282,6 @@
                     const fillWidth = barWidth * percentage / 100;
                     
                     // Ajouter l'emoji et le nombre à l'icône
-                    const emoji = transportIcons[mode];
                     icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
                     
                     // Animer l'icône à la position finale
