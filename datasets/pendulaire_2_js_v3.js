@@ -31,664 +31,184 @@ const pendulaireData = {
   ],
   "values": {
     "Total des pendulaires dont le principal moyen de transport est connu": {
-      "1990": {
-        "nombre": 2925399.0,
-        "pourcentage": 100.0
-      },
-      "2000": {
-        "nombre": 2998642.0,
-        "pourcentage": 100.0
-      },
-      "2010": {
-        "nombre": 3599516.0,
-        "pourcentage": 100.0
-      },
-      "2011": {
-        "nombre": 3640557.0,
-        "pourcentage": 100.0
-      },
-      "2012": {
-        "nombre": 3651552.0,
-        "pourcentage": 100.0
-      },
-      "2013": {
-        "nombre": 3843860.0,
-        "pourcentage": 100.0
-      },
-      "2014": {
-        "nombre": 3901350.0,
-        "pourcentage": 100.0
-      },
-      "2015": {
-        "nombre": 3921729.0,
-        "pourcentage": 100.0
-      },
-      "2016": {
-        "nombre": 3925260.0,
-        "pourcentage": 100.0
-      },
-      "2017": {
-        "nombre": 3976201.0,
-        "pourcentage": 100.0
-      },
-      "2018": {
-        "nombre": 3574399.0,
-        "pourcentage": 100.0
-      },
-      "2019": {
-        "nombre": 3603723.0,
-        "pourcentage": 100.0
-      },
-      "2020": {
-        "nombre": 3452311.0,
-        "pourcentage": 100.0
-      },
-      "2021": {
-        "nombre": 3471104.0,
-        "pourcentage": 100.0
-      },
-      "2022": {
-        "nombre": 3589840.0,
-        "pourcentage": 100.0
-      },
-      "2023": {
-        "nombre": 3651882.20342975,
-        "pourcentage": 100.0
-      }
+      "1990": { "nombre": 2925399, "pourcentage": 100.0 },
+      "2000": { "nombre": 2998642, "pourcentage": 100.0 },
+      "2010": { "nombre": 3599516, "pourcentage": 100.0 },
+      "2011": { "nombre": 3640557, "pourcentage": 100.0 },
+      "2012": { "nombre": 3651552, "pourcentage": 100.0 },
+      "2013": { "nombre": 3843860, "pourcentage": 100.0 },
+      "2014": { "nombre": 3901350, "pourcentage": 100.0 },
+      "2015": { "nombre": 3921729, "pourcentage": 100.0 },
+      "2016": { "nombre": 3925260, "pourcentage": 100.0 },
+      "2017": { "nombre": 3976201, "pourcentage": 100.0 },
+      "2018": { "nombre": 3574399, "pourcentage": 100.0 },
+      "2019": { "nombre": 3603723, "pourcentage": 100.0 },
+      "2020": { "nombre": 3452311, "pourcentage": 100.0 },
+      "2021": { "nombre": 3471104, "pourcentage": 100.0 },
+      "2022": { "nombre": 3589840, "pourcentage": 100.0 },
+      "2023": { "nombre": 3651882, "pourcentage": 100.0 }
     },
     "à pied": {
-      "1990": {
-        "nombre": 307879.0,
-        "pourcentage": 10.524342149566607
-      },
-      "2000": {
-        "nombre": 264954.0,
-        "pourcentage": 8.835799671984851
-      },
-      "2010": {
-        "nombre": 358838.0,
-        "pourcentage": 9.969062507292648
-      },
-      "2011": {
-        "nombre": 346896.0,
-        "pourcentage": 9.528651796964036
-      },
-      "2012": {
-        "nombre": 337243.0,
-        "pourcentage": 9.235607215781124
-      },
-      "2013": {
-        "nombre": 357585.0,
-        "pourcentage": 9.302758164969587
-      },
-      "2014": {
-        "nombre": 357898.0,
-        "pourcentage": 9.173696284619428
-      },
-      "2015": {
-        "nombre": 353955.0,
-        "pourcentage": 9.02548340285624
-      },
-      "2016": {
-        "nombre": 345923.0,
-        "pourcentage": 8.812741066833789
-      },
-      "2017": {
-        "nombre": 340003.0,
-        "pourcentage": 8.55095102083622
-      },
-      "2018": {
-        "nombre": 321513.0,
-        "pourcentage": 8.994882776097464
-      },
-      "2019": {
-        "nombre": 310575.0,
-        "pourcentage": 8.618170708459003
-      },
-      "2020": {
-        "nombre": 331633.0,
-        "pourcentage": 9.606116019095614
-      },
-      "2021": {
-        "nombre": 327869.0,
-        "pourcentage": 9.4456635291
-      },
-      "2022": {
-        "nombre": 335479.0,
-        "pourcentage": 9.3452339484
-      },
-      "2023": {
-        "nombre": 334966.783427554,
-        "pourcentage": 9.17244217551602
-      }
+      "1990": { "nombre": 307879, "pourcentage": 10.5 },
+      "2000": { "nombre": 264954, "pourcentage": 8.8 },
+      "2010": { "nombre": 358838, "pourcentage": 10.0 },
+      "2011": { "nombre": 346896, "pourcentage": 9.5 },
+      "2012": { "nombre": 337243, "pourcentage": 9.2 },
+      "2013": { "nombre": 357585, "pourcentage": 9.3 },
+      "2014": { "nombre": 357898, "pourcentage": 9.2 },
+      "2015": { "nombre": 353955, "pourcentage": 9.0 },
+      "2016": { "nombre": 345923, "pourcentage": 8.8 },
+      "2017": { "nombre": 340003, "pourcentage": 8.6 },
+      "2018": { "nombre": 321513, "pourcentage": 9.0 },
+      "2019": { "nombre": 310575, "pourcentage": 8.6 },
+      "2020": { "nombre": 331633, "pourcentage": 9.6 },
+      "2021": { "nombre": 327869, "pourcentage": 9.4 },
+      "2022": { "nombre": 335479, "pourcentage": 9.3 },
+      "2023": { "nombre": 334967, "pourcentage": 9.2 }
     },
     "vélo": {
-      "1990": {
-        "nombre": 212781.0,
-        "pourcentage": 7.273571912754466
-      },
-      "2000": {
-        "nombre": 203478.0,
-        "pourcentage": 6.785671647365707
-      },
-      "2010": {
-        "nombre": 216031.0,
-        "pourcentage": 6.001668002031384
-      },
-      "2011": {
-        "nombre": 232744.0,
-        "pourcentage": 6.393087651147887
-      },
-      "2012": {
-        "nombre": 222485.0,
-        "pourcentage": 6.0928887223843455
-      },
-      "2013": {
-        "nombre": 248611.0,
-        "pourcentage": 6.467743362141181
-      },
-      "2014": {
-        "nombre": 252703.0,
-        "pourcentage": 6.477321952657414
-      },
-      "2015": {
-        "nombre": 258355.0,
-        "pourcentage": 6.587783092610428
-      },
-      "2016": {
-        "nombre": 260601.0,
-        "pourcentage": 6.639076137631647
-      },
-      "2017": {
-        "nombre": 271108.0,
-        "pourcentage": 6.818266983987982
-      },
-      "2018": {
-        "nombre": 264245.0,
-        "pourcentage": 7.392711334129178
-      },
-      "2019": {
-        "nombre": 287548.0,
-        "pourcentage": 7.979192629400206
-      },
-      "2020": {
-        "nombre": 245989.0,
-        "pourcentage": 7.12534299488082
-      },
-      "2021": {
-        "nombre": 242509.0,
-        "pourcentage": 6.9865220346
-      },
-      "2022": {
-        "nombre": 248111.0,
-        "pourcentage": 6.9114648079
-      },
-      "2023": {
-        "nombre": 235278.160817428,
-        "pourcentage": 6.44265471094498
-      }
+      "1990": { "nombre": 212781, "pourcentage": 7.3 },
+      "2000": { "nombre": 203478, "pourcentage": 6.8 },
+      "2010": { "nombre": 216031, "pourcentage": 6.0 },
+      "2011": { "nombre": 232744, "pourcentage": 6.4 },
+      "2012": { "nombre": 222485, "pourcentage": 6.1 },
+      "2013": { "nombre": 248611, "pourcentage": 6.5 },
+      "2014": { "nombre": 252703, "pourcentage": 6.5 },
+      "2015": { "nombre": 258355, "pourcentage": 6.6 },
+      "2016": { "nombre": 260601, "pourcentage": 6.6 },
+      "2017": { "nombre": 271108, "pourcentage": 6.8 },
+      "2018": { "nombre": 264245, "pourcentage": 7.4 },
+      "2019": { "nombre": 287548, "pourcentage": 8.0 },
+      "2020": { "nombre": 245989, "pourcentage": 7.1 },
+      "2021": { "nombre": 242509, "pourcentage": 7.0 },
+      "2022": { "nombre": 248111, "pourcentage": 6.9 },
+      "2023": { "nombre": 235278, "pourcentage": 6.4 }
     },
     "vélo éléctrique": {
-      "1990": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2000": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2010": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2011": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2012": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2013": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2014": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2015": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2016": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2017": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2018": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2019": {
-        "nombre": null,
-        "pourcentage": null
-      },
-      "2020": {
-        "nombre": 52531.0,
-        "pourcentage": 1.521618417344208
-      },
-      "2021": {
-        "nombre": 57278.0,
-        "pourcentage": 1.6501469061
-      },
-      "2022": {
-        "nombre": 69610.0,
-        "pourcentage": 1.9390702291
-      },
-      "2023": {
-        "nombre": 74102.904691245,
-        "pourcentage": 2.02917018028812
-      }
+      "1990": { "nombre": null, "pourcentage": null },
+      "2000": { "nombre": null, "pourcentage": null },
+      "2010": { "nombre": null, "pourcentage": null },
+      "2011": { "nombre": null, "pourcentage": null },
+      "2012": { "nombre": null, "pourcentage": null },
+      "2013": { "nombre": null, "pourcentage": null },
+      "2014": { "nombre": null, "pourcentage": null },
+      "2015": { "nombre": null, "pourcentage": null },
+      "2016": { "nombre": null, "pourcentage": null },
+      "2017": { "nombre": null, "pourcentage": null },
+      "2018": { "nombre": null, "pourcentage": null },
+      "2019": { "nombre": null, "pourcentage": null },
+      "2020": { "nombre": 52531, "pourcentage": 1.5 },
+      "2021": { "nombre": 57278, "pourcentage": 1.7 },
+      "2022": { "nombre": 69610, "pourcentage": 1.9 },
+      "2023": { "nombre": 74103, "pourcentage": 2.0 }
     },
     "deux-roues motorisé (sans vélo électrique)": {
-      "1990": {
-        "nombre": 117276.0,
-        "pourcentage": 4.008889043853505
-      },
-      "2000": {
-        "nombre": 88950.0,
-        "pourcentage": 2.966342764491393
-      },
-      "2010": {
-        "nombre": 65770.0,
-        "pourcentage": 1.8271901000023336
-      },
-      "2011": {
-        "nombre": 67008.0,
-        "pourcentage": 1.8405974690136704
-      },
-      "2012": {
-        "nombre": 63807.0,
-        "pourcentage": 1.7473939848042697
-      },
-      "2013": {
-        "nombre": 66471.0,
-        "pourcentage": 1.729277341006176
-      },
-      "2014": {
-        "nombre": 70771.0,
-        "pourcentage": 1.8140130980301692
-      },
-      "2015": {
-        "nombre": 70775.0,
-        "pourcentage": 1.804688697255726
-      },
-      "2016": {
-        "nombre": 63607.0,
-        "pourcentage": 1.620453167433495
-      },
-      "2017": {
-        "nombre": 62778.0,
-        "pourcentage": 1.578843725455529
-      },
-      "2018": {
-        "nombre": 56052.0,
-        "pourcentage": 1.5681517368374376
-      },
-      "2019": {
-        "nombre": 57915.0,
-        "pourcentage": 1.6070880031567356
-      },
-      "2020": {
-        "nombre": 54043.0,
-        "pourcentage": 1.5654151668259322
-      },
-      "2021": {
-        "nombre": 52968.0,
-        "pourcentage": 1.5259718976
-      },
-      "2022": {
-        "nombre": 56105.0,
-        "pourcentage": 1.5628729193
-      },
-      "2023": {
-        "nombre": 54210.478871729,
-        "pourcentage": 1.48445310806619
-      }
+      "1990": { "nombre": 117276, "pourcentage": 4.0 },
+      "2000": { "nombre": 88950, "pourcentage": 3.0 },
+      "2010": { "nombre": 65770, "pourcentage": 1.8 },
+      "2011": { "nombre": 67008, "pourcentage": 1.8 },
+      "2012": { "nombre": 63807, "pourcentage": 1.7 },
+      "2013": { "nombre": 66471, "pourcentage": 1.7 },
+      "2014": { "nombre": 70771, "pourcentage": 1.8 },
+      "2015": { "nombre": 70775, "pourcentage": 1.8 },
+      "2016": { "nombre": 63607, "pourcentage": 1.6 },
+      "2017": { "nombre": 62778, "pourcentage": 1.6 },
+      "2018": { "nombre": 56052, "pourcentage": 1.6 },
+      "2019": { "nombre": 57915, "pourcentage": 1.6 },
+      "2020": { "nombre": 54043, "pourcentage": 1.6 },
+      "2021": { "nombre": 52968, "pourcentage": 1.5 },
+      "2022": { "nombre": 56105, "pourcentage": 1.6 },
+      "2023": { "nombre": 54210, "pourcentage": 1.5 }
     },
     "voiture": {
-      "1990": {
-        "nombre": 1467084.0,
-        "pourcentage": 50.14987699113864
-      },
-      "2000": {
-        "nombre": 1661987.0,
-        "pourcentage": 55.4246555607505
-      },
-      "2010": {
-        "nombre": 1884456.0,
-        "pourcentage": 52.35303857518622
-      },
-      "2011": {
-        "nombre": 1918019.0,
-        "pourcentage": 52.684767742958016
-      },
-      "2012": {
-        "nombre": 1929851.0,
-        "pourcentage": 52.850157960231705
-      },
-      "2013": {
-        "nombre": 2026781.0,
-        "pourcentage": 52.72775283178888
-      },
-      "2014": {
-        "nombre": 2046631.0,
-        "pourcentage": 52.459558870647335
-      },
-      "2015": {
-        "nombre": 2056790.0,
-        "pourcentage": 52.44600022082096
-      },
-      "2016": {
-        "nombre": 2058074.0,
-        "pourcentage": 52.4315331978009
-      },
-      "2017": {
-        "nombre": 2074948.0,
-        "pourcentage": 52.18418284186338
-      },
-      "2018": {
-        "nombre": 1841837.0,
-        "pourcentage": 51.52857865056475
-      },
-      "2019": {
-        "nombre": 1833292.0,
-        "pourcentage": 50.872167477911034
-      },
-      "2020": {
-        "nombre": 1811290.0,
-        "pourcentage": 52.46601479414803
-      },
-      "2021": {
-        "nombre": 1826832.0,
-        "pourcentage": 52.629719219
-      },
-      "2022": {
-        "nombre": 1810253.0,
-        "pourcentage": 50.427128596
-      },
-      "2023": {
-        "nombre": 1820225.20044671,
-        "pourcentage": 49.8434806779146
-      }
+      "1990": { "nombre": 1467084, "pourcentage": 50.1 },
+      "2000": { "nombre": 1661987, "pourcentage": 55.4 },
+      "2010": { "nombre": 1884456, "pourcentage": 52.4 },
+      "2011": { "nombre": 1918019, "pourcentage": 52.7 },
+      "2012": { "nombre": 1929851, "pourcentage": 52.9 },
+      "2013": { "nombre": 2026781, "pourcentage": 52.7 },
+      "2014": { "nombre": 2046631, "pourcentage": 52.5 },
+      "2015": { "nombre": 2056790, "pourcentage": 52.4 },
+      "2016": { "nombre": 2058074, "pourcentage": 52.4 },
+      "2017": { "nombre": 2074948, "pourcentage": 52.2 },
+      "2018": { "nombre": 1841837, "pourcentage": 51.5 },
+      "2019": { "nombre": 1833292, "pourcentage": 50.9 },
+      "2020": { "nombre": 1811290, "pourcentage": 52.5 },
+      "2021": { "nombre": 1826832, "pourcentage": 52.6 },
+      "2022": { "nombre": 1810253, "pourcentage": 50.4 },
+      "2023": { "nombre": 1820225, "pourcentage": 49.8 }
     },
     "transports publics routiers": {
-      "1990": {
-        "nombre": 493473.0,
-        "pourcentage": 16.868570748810676
-      },
-      "2000": {
-        "nombre": 416192.0,
-        "pourcentage": 13.8793493854885
-      },
-      "2010": {
-        "nombre": 495821.0,
-        "pourcentage": 13.7746574817281
-      },
-      "2011": {
-        "nombre": 491274.0,
-        "pourcentage": 13.494473510509518
-      },
-      "2012": {
-        "nombre": 500353.0,
-        "pourcentage": 13.702475002409933
-      },
-      "2013": {
-        "nombre": 515745.0,
-        "pourcentage": 13.417372120732804
-      },
-      "2014": {
-        "nombre": 528338.0,
-        "pourcentage": 13.542440437284531
-      },
-      "2015": {
-        "nombre": 525677.0,
-        "pourcentage": 13.404215334613893
-      },
-      "2016": {
-        "nombre": 534235.0,
-        "pourcentage": 13.610181236402175
-      },
-      "2017": {
-        "nombre": 543681.0,
-        "pourcentage": 13.673378181837387
-      },
-      "2018": {
-        "nombre": 487383.0,
-        "pourcentage": 13.635383179102279
-      },
-      "2019": {
-        "nombre": 489619.0,
-        "pourcentage": 13.586477096047615
-      },
-      "2020": {
-        "nombre": 422589.0,
-        "pourcentage": 12.240756988579534
-      },
-      "2021": {
-        "nombre": 425975.0,
-        "pourcentage": 12.272038334
-      },
-      "2022": {
-        "nombre": 473286.0,
-        "pourcentage": 13.184037081
-      },
-      "2023": {
-        "nombre": 499982.658161385,
-        "pourcentage": 13.6910949014679
-      }
+      "1990": { "nombre": 493473, "pourcentage": 16.9 },
+      "2000": { "nombre": 416192, "pourcentage": 13.9 },
+      "2010": { "nombre": 495821, "pourcentage": 13.8 },
+      "2011": { "nombre": 491274, "pourcentage": 13.5 },
+      "2012": { "nombre": 500353, "pourcentage": 13.7 },
+      "2013": { "nombre": 515745, "pourcentage": 13.4 },
+      "2014": { "nombre": 528338, "pourcentage": 13.5 },
+      "2015": { "nombre": 525677, "pourcentage": 13.4 },
+      "2016": { "nombre": 534235, "pourcentage": 13.6 },
+      "2017": { "nombre": 543681, "pourcentage": 13.7 },
+      "2018": { "nombre": 487383, "pourcentage": 13.6 },
+      "2019": { "nombre": 489619, "pourcentage": 13.6 },
+      "2020": { "nombre": 422589, "pourcentage": 12.2 },
+      "2021": { "nombre": 425975, "pourcentage": 12.3 },
+      "2022": { "nombre": 473286, "pourcentage": 13.2 },
+      "2023": { "nombre": 499983, "pourcentage": 13.7 }
     },
     "train": {
-      "1990": {
-        "nombre": 326906.0,
-        "pourcentage": 11.174749153876103
-      },
-      "2000": {
-        "nombre": 363081.0,
-        "pourcentage": 12.108180969919049
-      },
-      "2010": {
-        "nombre": 570702.0,
-        "pourcentage": 15.85496494528709
-      },
-      "2011": {
-        "nombre": 577183.0,
-        "pourcentage": 15.85424977551512
-      },
-      "2012": {
-        "nombre": 590518.0,
-        "pourcentage": 16.17169904741874
-      },
-      "2013": {
-        "nombre": 619213.0,
-        "pourcentage": 16.109145494372846
-      },
-      "2014": {
-        "nombre": 636273.0,
-        "pourcentage": 16.30904686839171
-      },
-      "2015": {
-        "nombre": 647728.0,
-        "pourcentage": 16.516388562289745
-      },
-      "2016": {
-        "nombre": 654819.0,
-        "pourcentage": 16.682181562495224
-      },
-      "2017": {
-        "nombre": 673410.0,
-        "pourcentage": 16.93601505557692
-      },
-      "2018": {
-        "nombre": 593719.0,
-        "pourcentage": 16.610316867255168
-      },
-      "2019": {
-        "nombre": 613841.0,
-        "pourcentage": 17.033523386786385
-      },
-      "2020": {
-        "nombre": 519769.0,
-        "pourcentage": 15.055682990321555
-      },
-      "2021": {
-        "nombre": 519968.0,
-        "pourcentage": 14.97989588
-      },
-      "2022": {
-        "nombre": 577813.0,
-        "pourcentage": 16.095794954
-      },
-      "2023": {
-        "nombre": 615148.095748138,
-        "pourcentage": 16.8446861503476
-      }
+      "1990": { "nombre": 326906, "pourcentage": 11.2 },
+      "2000": { "nombre": 363081, "pourcentage": 12.1 },
+      "2010": { "nombre": 570702, "pourcentage": 15.9 },
+      "2011": { "nombre": 577183, "pourcentage": 15.9 },
+      "2012": { "nombre": 590518, "pourcentage": 16.2 },
+      "2013": { "nombre": 619213, "pourcentage": 16.1 },
+      "2014": { "nombre": 636273, "pourcentage": 16.3 },
+      "2015": { "nombre": 647728, "pourcentage": 16.5 },
+      "2016": { "nombre": 654819, "pourcentage": 16.7 },
+      "2017": { "nombre": 673410, "pourcentage": 16.9 },
+      "2018": { "nombre": 593719, "pourcentage": 16.6 },
+      "2019": { "nombre": 613841, "pourcentage": 17.0 },
+      "2020": { "nombre": 519769, "pourcentage": 15.1 },
+      "2021": { "nombre": 519968, "pourcentage": 15.0 },
+      "2022": { "nombre": 577813, "pourcentage": 16.1 },
+      "2023": { "nombre": 615148, "pourcentage": 16.8 }
     },
     "autres moyens de transport": {
-      "1990": {
-        "nombre": 0.0,
-        "pourcentage": 0.0
-      },
-      "2000": {
-        "nombre": 0.0,
-        "pourcentage": 0.0
-      },
-      "2010": {
-        "nombre": 7898.0,
-        "pourcentage": 0.21941838847222794
-      },
-      "2011": {
-        "nombre": 7433.0,
-        "pourcentage": 0.20417205389175339
-      },
-      "2012": {
-        "nombre": 7295.0,
-        "pourcentage": 0.19977806696988018
-      },
-      "2013": {
-        "nombre": 9453.0,
-        "pourcentage": 0.24592466947287364
-      },
-      "2014": {
-        "nombre": 8735.0,
-        "pourcentage": 0.2238968562164379
-      },
-      "2015": {
-        "nombre": 8449.0,
-        "pourcentage": 0.21544068955300072
-      },
-      "2016": {
-        "nombre": 8000.0,
-        "pourcentage": 0.20380815538333766
-      },
-      "2017": {
-        "nombre": 10273.0,
-        "pourcentage": 0.2583621904425858
-      },
-      "2018": {
-        "nombre": 9650.0,
-        "pourcentage": 0.26997545601372425
-      },
-      "2019": {
-        "nombre": 10933.0,
-        "pourcentage": 0.3033806982390156
-      },
-      "2020": {
-        "nombre": 14467.0,
-        "pourcentage": 0.4190526288042995
-      },
-      "2021": {
-        "nombre": 17704.0,
-        "pourcentage": 0.5100422
-      },
-      "2022": {
-        "nombre": 19184.0,
-        "pourcentage": 0.5343974642
-      },
-      "2023": {
-        "nombre": 17967.921265562,
-        "pourcentage": 0.49201809545464
-      }
+      "1990": { "nombre": 0, "pourcentage": 0.0 },
+      "2000": { "nombre": 0, "pourcentage": 0.0 },
+      "2010": { "nombre": 7898, "pourcentage": 0.2 },
+      "2011": { "nombre": 7433, "pourcentage": 0.2 },
+      "2012": { "nombre": 7295, "pourcentage": 0.2 },
+      "2013": { "nombre": 9453, "pourcentage": 0.2 },
+      "2014": { "nombre": 8735, "pourcentage": 0.2 },
+      "2015": { "nombre": 8449, "pourcentage": 0.2 },
+      "2016": { "nombre": 8000, "pourcentage": 0.2 },
+      "2017": { "nombre": 10273, "pourcentage": 0.3 },
+      "2018": { "nombre": 9650, "pourcentage": 0.3 },
+      "2019": { "nombre": 10933, "pourcentage": 0.3 },
+      "2020": { "nombre": 14467, "pourcentage": 0.4 },
+      "2021": { "nombre": 17704, "pourcentage": 0.5 },
+      "2022": { "nombre": 19184, "pourcentage": 0.5 },
+      "2023": { "nombre": 17968, "pourcentage": 0.5 }
     },
     "Pendulaires dont le principal moyen de transport n'est pas connu": {
-      "1990": {
-        "nombre": 20023.0,
-        "pourcentage": NaN
-      },
-      "2000": {
-        "nombre": 59006.0,
-        "pourcentage": NaN
-      },
-      "2010": {
-        "nombre": 42539.0,
-        "pourcentage": NaN
-      },
-      "2011": {
-        "nombre": 26306.0,
-        "pourcentage": NaN
-      },
-      "2012": {
-        "nombre": 35003.0,
-        "pourcentage": NaN
-      },
-      "2013": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2014": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2015": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2016": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2017": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2018": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2019": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2020": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2021": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2022": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      },
-      "2023": {
-        "nombre": 0.0,
-        "pourcentage": NaN
-      }
+      "1990": { "nombre": 20023, "pourcentage": NaN },
+      "2000": { "nombre": 59006, "pourcentage": NaN },
+      "2010": { "nombre": 42539, "pourcentage": NaN },
+      "2011": { "nombre": 26306, "pourcentage": NaN },
+      "2012": { "nombre": 35003, "pourcentage": NaN },
+      "2013": { "nombre": 0, "pourcentage": NaN },
+      "2014": { "nombre": 0, "pourcentage": NaN },
+      "2015": { "nombre": 0, "pourcentage": NaN },
+      "2016": { "nombre": 0, "pourcentage": NaN },
+      "2017": { "nombre": 0, "pourcentage": NaN },
+      "2018": { "nombre": 0, "pourcentage": NaN },
+      "2019": { "nombre": 0, "pourcentage": NaN },
+      "2020": { "nombre": 0, "pourcentage": NaN },
+      "2021": { "nombre": 0, "pourcentage": NaN },
+      "2022": { "nombre": 0, "pourcentage": NaN },
+      "2023": { "nombre": 0, "pourcentage": NaN }
     }
   }
 };
