@@ -154,26 +154,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="datasets/pendulaire_2_js_v3.js"></script>
     <script>
-        // Fonction pour normaliser les clés (supprimer les accents et convertir en minuscules)
-        function normalizeKey(str) {
-            return str
-                .normalize("NFD") // Décomposer les caractères accentués
-                .replace(/[\u0300-\u036f]/g, "") // Supprimer les accents
-                .toLowerCase()
-                .trim(); // Supprimer les espaces inutiles
-        }
-
         // Pictogrammes pour chaque mode de transport
         const transportIcons = {
-            "a pied": "🚶",
-            "velo": "🚲",
-            "velo electrique": "🔋🚲",
-            "deux-roues motorise (sans velo electrique)": "🏍",
+            "à pied": "🚶",
+            "vélo": "🚲",
+            "vélo électrique": "🔋🚲", // Corrigé pour correspondre à pendulaire_2_js_v3.js
+            "deux-roues motorisé (sans vélo électrique)": "🏍",
             "voiture": "🚗",
             "transports publics routiers": "🚌",
             "train": "🚆",
             "autres moyens de transport": "❓",
-            "pendulaires dont le principal moyen de transport n'est pas connu": "�"
+            "Pendulaires dont le principal moyen de transport n'est pas connu": "�"
         };
 
         // Couleurs pour les différents modes de transport
@@ -213,8 +204,6 @@
                 const percentage = data.pourcentage;
                 const nombre = data.nombre;
                 
-                console.log('Setting data-percentage for mode', mode, 'to', percentage); // Débogage
-                
                 const barContainer = document.createElement('div');
                 barContainer.className = 'bar-container';
                 barContainer.setAttribute('data-mode', mode);
@@ -227,8 +216,7 @@
                 // Icône du transport (positionné absolument)
                 const icon = document.createElement('div');
                 icon.className = 'transport-icon';
-                const normalizedMode = normalizeKey(mode);
-                icon.innerHTML = transportIcons[normalizedMode] || '❓';
+                icon.innerHTML = transportIcons[mode] || '❓'; // Utiliser '❓' si non défini
                 icon.style.color = transportColors[mode] || '#3498db';
                 
                 // Wrapper pour la barre
@@ -279,35 +267,27 @@
                     const mode = bar.parentElement.parentElement.getAttribute('data-mode');
                     console.log('Mode during animation:', mode); // Débogage
                     
-                    // Normaliser le mode pour gérer les différences d'accents ou d'espaces
-                    const normalizedMode = normalizeKey(mode);
-                    const emoji = transportIcons[normalizedMode];
-                    if (!emoji) {
-                        console.warn(`Mode "${mode}" (normalized: "${normalizedMode}") non trouvé dans transportIcons`);
+                    // Vérifier si le mode existe dans transportIcons, sinon utiliser un emoji par défaut
+                    const emoji = transportIcons[mode] || '❓';
+                    if (!transportIcons[mode]) {
+                        console.warn(`Mode "${mode}" non trouvé dans transportIcons, utilisation de l'emoji par défaut : ${emoji}`);
                     }
                     
-                    const percentage = parseFloat(bar.getAttribute('data-percentage'));
+                    const percentage = bar.getAttribute('data-percentage');
                     const value = bar.getAttribute('data-value');
                     const formattedValue = formatNumber(value);
                     
-                    console.log('Setting width for bar:', percentage + '%'); // Débogage
-                    
                     // Calculer la position finale de l'icône
                     const barWidth = bar.parentElement.offsetWidth;
-                    const fillWidth = barWidth * (percentage / 100);
+                    const fillWidth = barWidth * percentage / 100;
                     
                     // Ajouter l'emoji et le nombre à l'icône
-                    if (emoji) {
-                        icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
-                    } else {
-                        // Si l'emoji n'est pas trouvé, on conserve l'emoji initial
-                        icons[index].innerHTML = `${icons[index].innerHTML.split(' ')[0]} <span class="number">${formattedValue}</span>`;
-                    }
+                    icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
                     
                     // Animer l'icône à la position finale
                     icons[index].style.transform = `translateX(${fillWidth}px)`;
                     
-                    // Animer la barre
+                    // Animer la barre sans le nombre
                     bar.style.width = percentage + '%';
                     bar.textContent = ''; // Supprimer le nombre de la barre
                     
@@ -338,8 +318,7 @@
             
             icons.forEach(icon => {
                 const mode = icon.parentElement.getAttribute('data-mode');
-                const normalizedMode = normalizeKey(mode);
-                icon.innerHTML = transportIcons[normalizedMode] || '❓'; // Réinitialiser avec l'emoji correct
+                icon.innerHTML = transportIcons[mode] || '❓'; // Réinitialiser avec l'emoji correct
                 icon.style.transform = 'translateX(0)';
             });
         }
