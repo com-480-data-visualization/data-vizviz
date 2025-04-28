@@ -119,6 +119,7 @@ function animateBars() {
             //const mode = bar.parentElement.parentElement.getAttribute('data-mode');
             const mode = bar.parentElement.parentElement.parentElement.getAttribute('data-mode');
             icons[index].innerHTML = `${transportIcons[mode]} <span class="number">${formattedValue}</span>`;
+            console.log('Mode:', mode);
             
             // Animer l'icône à la position finale
             icons[index].style.transform = `translateX(${fillWidth}px)`;
