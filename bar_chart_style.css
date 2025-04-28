@@ -47,7 +47,7 @@ h1 {
     justify-content: flex-start; /* Aligner à gauche */
     font-size: 24px;
     position: absolute;
-    left: 300px; /* Positionné après le label */
+    left: 310px; /* Positionné après le label */
     z-index: 2;
     transition: transform 1.5s ease-out;
     transform: translateX(0);
