@@ -255,51 +255,53 @@
             });
         }
 
-        // Fonction pour animer les barres avec les pictogrammes
         function animateBars() {
-            const bars = document.querySelectorAll('.bar-fill');
-            const icons = document.querySelectorAll('.transport-icon');
-            let delay = 0;
-            
-            bars.forEach((bar, index) => {
-                setTimeout(() => {
-                    // Récupérer le mode à partir de l'attribut data-mode
-                    const mode = bar.parentElement.parentElement.getAttribute('data-mode');
-                    console.log('Mode during animation:', mode); // Débogage
-                    
-                    // Vérifier si le mode existe dans transportIcons, sinon utiliser un emoji par défaut
-                    const emoji = transportIcons[mode] || '❓';
-                    if (!transportIcons[mode]) {
-                        console.warn(`Mode "${mode}" non trouvé dans transportIcons, utilisation de l'emoji par défaut : ${emoji}`);
-                    }
-                    
-                    const percentage = bar.getAttribute('data-percentage');
-                    const value = bar.getAttribute('data-value');
-                    const formattedValue = formatNumber(value);
-                    
-                    // Calculer la position finale de l'icône
-                    const barWidth = bar.parentElement.offsetWidth;
-                    const fillWidth = barWidth * percentage / 100;
-                    
-                    // Ajouter l'emoji et le nombre à l'icône
-                    icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
-                    
-                    // Animer l'icône à la position finale
-                    icons[index].style.transform = `translateX(${fillWidth}px)`;
-                    
-                    // Animer la barre sans le nombre
-                    bar.style.width = percentage + '%';
-                    bar.textContent = ''; // Supprimer le nombre de la barre
-                    
-                    // Mettre à jour le pourcentage affiché
-                    const percentageEl = bar.parentElement.parentElement.nextElementSibling;
-                    percentageEl.textContent = parseFloat(percentage).toFixed(1) + '%';
-                    
-                }, delay);
+        const bars = document.querySelectorAll('.bar-fill');
+        const icons = document.querySelectorAll('.transport-icon');
+        let delay = 0;
+    
+        bars.forEach((bar, index) => {
+            setTimeout(() => {
+                const barContainer = bar.closest('.bar-container');
+                if (!barContainer) {
+                    console.error('Bar container not found for bar:', bar);
+                    return;
+                }
+                const mode = barContainer.getAttribute('data-mode');
+                console.log('Mode during animation:', mode);
                 
-                delay += 800; // Délai entre chaque animation
-            });
-        }
+                if (!mode) {
+                    console.error('Mode is null for bar container:', barContainer);
+                    return;
+                }
+            
+                const percentage = bar.getAttribute('data-percentage');
+                const value = bar.getAttribute('data-value');
+                const formattedValue = formatNumber(value);
+                
+                const barWidth = bar.parentElement.offsetWidth;
+                const fillWidth = barWidth * percentage / 100;
+                
+                const emoji = transportIcons[mode] || '❓';
+                icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
+            
+                icons[index].style.transform = `translateX(${fillWidth}px)`;
+            
+                bar.style.width = percentage + '%';
+                bar.textContent = '';
+            
+                const percentageEl = barContainer.querySelector('.percentage');
+                if (percentageEl) {
+                    percentageEl.textContent = parseFloat(percentage).toFixed(1) + '%';
+                } else {
+                    console.error('Percentage element not found for bar container:', barContainer);
+                }
+            }, delay);
+        
+            delay += 800;
+        });
+    }
+
 
         // Fonction pour réinitialiser l'animation
         function resetAnimation() {
