@@ -2,7 +2,7 @@
 const transportIcons = {
     "à pied": "🚶",
     "vélo": "🚲",
-    "vélo éléctrique": "🔋🚲",
+    "vélo électrique": "🔋🚲",
     "deux-roues motorisé (sans vélo électrique)": "🏍",
     "voiture": "🚗",
     "transports publics routiers": "🚌",
