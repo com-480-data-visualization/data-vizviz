@@ -75,7 +75,7 @@
             <div class="legend">
                 Data: Federal Statistical Office (FSO) | Visualization: EPFL
             </div>
-            <!-- Modal for Comparison -->
+            <!-- Modal pour comparaison -->
             <div class="modal" id="comparisonModal">
                 <div class="modal-content">
                     <span class="close-modal">×</span>
@@ -158,7 +158,7 @@
         const transportIcons = {
             "à pied": "🚶",
             "vélo": "🚲",
-            "vélo éléctrique": "🔋🚲", // Corrigé pour correspondre à pendulaire_2_js_v3.js
+            "vélo électrique": "🔋🚲",
             "deux-roues motorisé (sans vélo électrique)": "🏍",
             "voiture": "🚗",
             "transports publics routiers": "🚌",
@@ -182,7 +182,7 @@
         // Fonction pour formater les nombres
         function formatNumber(num) {
             if (num === null || isNaN(num)) return "N/A";
-            return Math.round(num).toString(); // Afficher sans virgules
+            return Math.round(num).toString();
         }
 
         // Fonction pour créer le graphique principal
@@ -190,14 +190,10 @@
             const chartContainer = document.getElementById('chart');
             chartContainer.innerHTML = '';
             
-            // Exclure le total et les données non connues
             const displayModes = pendulaireData.transport_modes.filter(mode => 
                 mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
                 mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
             );
-            
-            // Trouver la valeur maximale pour l'échelle
-            const maxValue = pendulaireData.values["voiture"]["2023"].pourcentage;
             
             displayModes.forEach(mode => {
                 const data = pendulaireData.values[mode]["2023"];
@@ -208,22 +204,18 @@
                 barContainer.className = 'bar-container';
                 barContainer.setAttribute('data-mode', mode);
                 
-                // Label du transport
                 const label = document.createElement('div');
                 label.className = 'transport-label';
                 label.textContent = mode;
                 
-                // Icône du transport (positionné absolument)
                 const icon = document.createElement('div');
                 icon.className = 'transport-icon';
-                icon.innerHTML = transportIcons[mode] || '❓'; // Utiliser '❓' si non défini
+                icon.innerHTML = transportIcons[mode] || '❓';
                 icon.style.color = transportColors[mode] || '#3498db';
                 
-                // Wrapper pour la barre
                 const barWrapper = document.createElement('div');
                 barWrapper.className = 'bar-wrapper';
                 
-                // Barre de progression
                 const bar = document.createElement('div');
                 bar.className = 'bar';
                 
@@ -234,7 +226,6 @@
                 barFill.setAttribute('data-value', nombre);
                 barFill.style.backgroundColor = transportColors[mode] || '#3498db';
                 
-                // Pourcentage
                 const percentageEl = document.createElement('div');
                 percentageEl.className = 'percentage';
                 percentageEl.textContent = '0%';
@@ -242,66 +233,52 @@
                 bar.appendChild(barFill);
                 barWrapper.appendChild(bar);
                 barContainer.appendChild(label);
-                barContainer.appendChild(icon);  // Icône après le label
+                barContainer.appendChild(icon);
                 barContainer.appendChild(barWrapper);
                 barContainer.appendChild(percentageEl);
                 
                 chartContainer.appendChild(barContainer);
                 
-                // Ajouter l'événement click pour ouvrir le modal
                 barContainer.addEventListener('click', function() {
                     openComparisonModal(mode);
                 });
             });
         }
 
+        // Fonction pour animer les barres avec les pictogrammes
         function animateBars() {
-        const bars = document.querySelectorAll('.bar-fill');
-        const icons = document.querySelectorAll('.transport-icon');
-        let delay = 0;
-    
-        bars.forEach((bar, index) => {
-            setTimeout(() => {
-                const barContainer = bar.closest('.bar-container');
-                if (!barContainer) {
-                    console.error('Bar container not found for bar:', bar);
-                    return;
-                }
-                const mode = barContainer.getAttribute('data-mode');
-                console.log('Mode during animation:', mode);
-                
-                if (!mode) {
-                    console.error('Mode is null for bar container:', barContainer);
-                    return;
-                }
+            const bars = document.querySelectorAll('.bar-fill');
+            const icons = document.querySelectorAll('.transport-icon');
+            let delay = 0;
             
-                const percentage = bar.getAttribute('data-percentage');
-                const value = bar.getAttribute('data-value');
-                const formattedValue = formatNumber(value);
-                
-                const barWidth = bar.parentElement.offsetWidth;
-                const fillWidth = barWidth * percentage / 100;
-                
-                const emoji = transportIcons[mode] || '❓';
-                icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
-            
-                icons[index].style.transform = `translateX(${fillWidth}px)`;
-            
-                bar.style.width = percentage + '%';
-                bar.textContent = '';
-            
-                const percentageEl = barContainer.querySelector('.percentage');
-                if (percentageEl) {
+            bars.forEach((bar, index) => {
+                setTimeout(() => {
+                    const mode = bar.closest('.bar-container').getAttribute('data-mode');
+                    console.log('Mode:', mode);
+                    
+                    const percentage = bar.getAttribute('data-percentage');
+                    const value = bar.getAttribute('data-value');
+                    const formattedValue = formatNumber(value);
+                    
+                    const barWidth = bar.parentElement.offsetWidth;
+                    const fillWidth = barWidth * percentage / 100;
+                    
+                    const emoji = transportIcons[mode] || '❓';
+                    icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
+                    
+                    icons[index].style.transform = `translateX(${fillWidth}px)`;
+                    
+                    bar.style.width = percentage + '%';
+                    bar.textContent = '';
+                    
+                    const percentageEl = bar.parentElement.parentElement.nextElementSibling;
                     percentageEl.textContent = parseFloat(percentage).toFixed(1) + '%';
-                } else {
-                    console.error('Percentage element not found for bar container:', barContainer);
-                }
-            }, delay);
-        
-            delay += 800;
-        });
-    }
-
+                    
+                }, delay);
+                
+                delay += 800;
+            });
+        }
 
         // Fonction pour réinitialiser l'animation
         function resetAnimation() {
@@ -320,7 +297,7 @@
             
             icons.forEach(icon => {
                 const mode = icon.parentElement.getAttribute('data-mode');
-                icon.innerHTML = transportIcons[mode] || '❓'; // Réinitialiser avec l'emoji correct
+                icon.innerHTML = transportIcons[mode] || '❓';
                 icon.style.transform = 'translateX(0)';
             });
         }
@@ -337,6 +314,5 @@
     <script src="chart_horloge_script.js"></script>
     <!-- Custom Script -->
     <script src="website_script.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'936fb0405c4ebccc',t:'MTc0NTc3MTI1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'936fec7f8c78b0a0',t:'MTc0NTc3MzcyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
