@@ -116,7 +116,8 @@ function animateBars() {
             const fillWidth = barWidth * percentage / 100;
             
             // Ajouter l'emoji et le nombre à l'icône
-            const mode = bar.parentElement.parentElement.getAttribute('data-mode');
+            //const mode = bar.parentElement.parentElement.getAttribute('data-mode');
+            const mode = bar.parentElement.parentElement.parentElement.getAttribute('data-mode');
             icons[index].innerHTML = `${transportIcons[mode]} <span class="number">${formattedValue}</span>`;
             
             // Animer l'icône à la position finale
