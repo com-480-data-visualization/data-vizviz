@@ -34,24 +34,26 @@
     <section id="map" class="section">
         <div class="container">
             <h2>Commuting Map</h2>
-            <div id="controls">
-                <div id="mode-selector">
-                    <label for="mode">Select Mode: </label>
-                    <select id="mode" onchange="updateMode(this.value)">
-                        <option value="arrival">Arrival Cities (Workplace)</option>
-                        <option value="departure">Departure Cities (Residence)</option>
-                    </select>
+            <div class="map-frame">
+                <div id="controls">
+                    <div id="mode-selector">
+                        <label for="mode">Select Mode: </label>
+                        <select id="mode" onchange="updateMode(this.value)">
+                            <option value="arrival">Arrival Cities (Workplace)</option>
+                            <option value="departure">Departure Cities (Residence)</option>
+                        </select>
+                    </div>
+                    <div id="year-selector">
+                        <label for="year">Select Year: </label>
+                        <select id="year" onchange="updateYear(this.value)">
+                            <option value="2020">2020</option>
+                            <option value="2018">2018</option>
+                            <option value="2014">2014</option>
+                        </select>
+                    </div>
                 </div>
-                <div id="year-selector">
-                    <label for="year">Select Year: </label>
-                    <select id="year" onchange="updateYear(this.value)">
-                        <option value="2020">2020</option>
-                        <option value="2018">2018</option>
-                        <option value="2014">2014</option>
-                    </select>
-                </div>
+                <div id="map"></div>
             </div>
-            <div id="map"></div>
         </div>
     </section>
 
@@ -158,7 +160,7 @@
         const transportIcons = {
             "à pied": "🚶",
             "vélo": "🚲",
-            "vélo éléctrique": "🔋🚲",
+            "vélo électrique": "🔋🚲",
             "deux-roues motorisé (sans vélo électrique)": "🏍",
             "voiture": "🚗",
             "transports publics routiers": "🚌",
@@ -171,7 +173,7 @@
         const transportColors = {
             "à pied": "#3498db",
             "vélo": "#2ecc71",
-            "vélo éléctrique": "#1abc9c",
+            "vélo électrique": "#1abc9c",
             "deux-roues motorisé (sans vélo électrique)": "#e74c3c",
             "voiture": "#f39c12",
             "transports publics routiers": "#9b59b6",
