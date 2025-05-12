@@ -57,7 +57,7 @@
         </div>
     </section>
 
-    <!-- Commuters per Canton Section (Bar Chart Race) -->
+    <!-- Commuters per Canton Section/ Section (Bar Chart Race) -->
     <section id="commuters-canton" class="section">
         <div class="container">
             <h2>Commuters per Canton</h2>
@@ -66,7 +66,7 @@
             </div>
             <div class="chartCard">
                 <h1>Swiss Cantons Bar Chart Race</h1>
-                <div id="selector">
+                <div id="chart-selector">
                     <label for="metric-select">Select Metric: </label>
                     <select id="metric-select">
                         <option value="Total">Total</option>
@@ -76,11 +76,11 @@
                         <option value="External commuting">External commuting</option>
                     </select>
                 </div>
-                <div id="controls">
+                <div id="chart-controls">
                     <button id="playButton">Pause</button>
                 </div>
                 <div id="yearLabel">Year</div>
-                <div id="error-message"></div>
+                <div id="chart-error-message"></div>
                 <div class="chartBox" id="chartBox"></div>
             </div>
         </div>
@@ -177,7 +177,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="datasets/pendulaire_2_js_v3.js"></script>
     <!-- Bar Chart Race Scripts -->
-    <script src="datasets/pendulaire_4.js"></script>
+    <script src="scripts/pendulaire_4.js"></script>
     <script src="race_chart.js"></script>
     <!-- Clock Script -->
     <script src="chart_horloge_script.js"></script>
@@ -224,6 +224,7 @@
             // Check if pendulaireData is defined
             if (!window.pendulaireData) {
                 console.error("pendulaireData is not defined. Check pendulaire_2_js_v3.js");
+                chartContainer.innerHTML = '<p>Error: Transport modes data not loaded.</p>';
                 return;
             }
 
@@ -239,7 +240,7 @@
                 
                 const barContainer = document.createElement('div');
                 barContainer.className = 'bar-container';
-                barContainer\setAttribute('data-mode', mode);
+                barContainer.setAttribute('data-mode', mode);
                 
                 const label = document.createElement('div');
                 label.className = 'transport-label';
@@ -352,6 +353,7 @@
                 document.getElementById('resetBtn').addEventListener('click', resetAnimation);
             } catch (error) {
                 console.error('Error initializing transport modes chart:', error);
+                document.getElementById('chart').innerHTML = '<p>Error: Failed to initialize transport modes chart.</p>';
             }
         });
     </script>
