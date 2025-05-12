@@ -154,23 +154,8 @@
                         </defs>
                     </svg>
                 </div>
-                <div class="legend">
-                    <div class="legend-item"><span class="color-box color-15"></span> 0-15 min</div>
-                    <div class="legend-item"><span class="color-box color-30"></span> 16-30 min</div>
-                    <div class="legend-item"><span class="color-box color-45"></span> 31-45 min</div>
-                    <div class="legend-item"><span class="color-box color-60"></span> 46-60 min</div>
-                    <div class="legend-item"><span class="color-box color-plus60"></span> >60 min</div>
-                </div>
-            </div>
-            <div class="info">
-                <p>The hand makes two complete rotations in 16 seconds, then stops. The arcs are built with the hand, display their number of commuters, and persist.</p>
-            </div>
-            <div id="error-message" class="error"></div>
-        </div>
-    </section>
+               
 
-    <!-- Scripts -->
-    <!-- Leaflet for Map -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="map.js"></script>
     <!-- Chart.js for Bar Chart -->
@@ -179,8 +164,164 @@
     <!-- Bar Chart Race Scripts -->
     <script src="pendulaire_4.js"></script>
     <script src="race_chart.js"></script>
-    <!-- Transport Modes Script -->
-    <script src="bar_chart_script.js"></script>
+    <!-- Inline Script for Transport Modes -->
+    <script>
+        // Pictogrammes pour chaque mode de transport
+        const transportIcons = {
+            "à pied": "🚶",
+            "vélo": "🚲",
+            "vélo éléctrique": "🔋🚲",
+            "deux-roues motorisé (sans vélo électrique)": "🏍",
+            "voiture": "🚗",
+            "transports publics routiers": "🚌",
+            "train": "🚆",
+            "autres moyens de transport": "❓",
+            "Pendulaires dont le principal moyen de transport n'est pas connu": "�"
+        };
+
+        // Couleurs pour les différents modes de transport
+        const transportColors = {
+            "à pied": "#3498db",
+            "vélo": "#2ecc71",
+            "vélo éléctrique": "#1abc9c",
+            "deux-roues motorisé (sans vélo électrique)": "#e74c3c",
+            "voiture": "#f39c12",
+            "transports publics routiers": "#9b59b6",
+            "train": "#34495e",
+            "autres moyens de transport": "#7f8c8d"
+        };
+
+        // Fonction pour formater les nombres
+        function formatNumber(num) {
+            if (num === null || isNaN(num)) return "N/A";
+            return Math.round(num).toString();
+        }
+
+        // Fonction pour créer le graphique principal
+        function createChart() {
+            const chartContainer = document.getElementById('chart');
+            chartContainer.innerHTML = '';
+            
+            const displayModes = pendulaireData.transport_modes.filter(mode => 
+                mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
+                mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
+            );
+            
+            displayModes.forEach(mode => {
+                const data = pendulaireData.values[mode]["2023"];
+                const percentage = data.pourcentage;
+                const nombre = data.nombre;
+                
+                const barContainer = document.createElement('div');
+                barContainer.className = 'bar-container';
+                barContainer.setAttribute('data-mode', mode);
+                
+                const label = document.createElement('div');
+                label.className = 'transport-label';
+                label.textContent = mode;
+                
+                const icon = document.createElement('div');
+                icon.className = 'transport-icon';
+                icon.innerHTML = transportIcons[mode] || '❓';
+                icon.style.color = transportColors[mode] || '#3498db';
+                
+                const barWrapper = document.createElement('div');
+                barWrapper.className = 'bar-wrapper';
+                
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                
+                const barFill = document.createElement('div');
+                barFill.className = 'bar-fill';
+                barFill.style.width = '0%';
+                barFill.setAttribute('data-percentage', percentage);
+                barFill.setAttribute('data-value', nombre);
+                barFill.style.backgroundColor = transportColors[mode] || '#3498db';
+                
+                const percentageEl = document.createElement('div');
+                percentageEl.className = 'percentage';
+                percentageEl.textContent = '0%';
+                
+                bar.appendChild(barFill);
+                barWrapper.appendChild(bar);
+                barContainer.appendChild(label);
+                barContainer.appendChild(icon);
+                barContainer.appendChild(barWrapper);
+                barContainer.appendChild(percentageEl);
+                
+                chartContainer.appendChild(barContainer);
+                
+                barContainer.addEventListener('click', function() {
+                    openComparisonModal(mode);
+                });
+            });
+        }
+
+        // Fonction pour animer les barres avec les pictogrammes
+        function animateBars() {
+            const bars = document.querySelectorAll('.bar-fill');
+            const icons = document.querySelectorAll('.transport-icon');
+            let delay = 0;
+            
+            bars.forEach((bar, index) => {
+                setTimeout(() => {
+                    const mode = bar.closest('.bar-container').getAttribute('data-mode');
+                    console.log('Mode:', mode);
+                    
+                    const percentage = bar.getAttribute('data-percentage');
+                    const value = bar.getAttribute('data-value');
+                    const formattedValue = formatNumber(value);
+                    
+                    const barWidth = bar.parentElement.offsetWidth;
+                    const fillWidth = barWidth * percentage / 100;
+                    
+                    const emoji = transportIcons[mode] || '❓';
+                    icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
+                    
+                    icons[index].style.transform = `translateX(${fillWidth}px)`;
+                    
+                    bar.style.width = percentage + '%';
+                    bar.textContent = '';
+                    
+                    const percentageEl = bar.parentElement.parentElement.nextElementSibling;
+                    percentageEl.textContent = parseFloat(percentage).toFixed(1) + '%';
+                    
+                }, delay);
+                
+                delay += 800;
+            });
+        }
+
+        // Fonction pour réinitialiser l'animation
+        function resetAnimation() {
+            const bars = document.querySelectorAll('.bar-fill');
+            const percentages = document.querySelectorAll('.percentage');
+            const icons = document.querySelectorAll('.transport-icon');
+            
+            bars.forEach(bar => {
+                bar.style.width = '0%';
+                bar.textContent = '';
+            });
+            
+            percentages.forEach(p => {
+                p.textContent = '0%';
+            });
+            
+            icons.forEach(icon => {
+                const mode = icon.parentElement.getAttribute('data-mode');
+                icon.innerHTML = transportIcons[mode] || '❓';
+                icon.style.transform = 'translateX(0)';
+            });
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            createChart();
+            
+            document.getElementById('animateBtn').addEventListener('click', animateBars);
+            document.getElementById('resetBtn').addEventListener('click', resetAnimation);
+        });
+    </script>
     <!-- Clock Script -->
     <script src="chart_horloge_script.js"></script>
     <!-- Custom Script -->
