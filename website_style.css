@@ -123,3 +123,13 @@ h2 {
     color: #8B0000;
     text-align: center;
 }
+
+/* Ensure commuters-canton section has enough height for animation */
+#commuters-canton .container {
+    min-height: 1300px; /* Approximate height for 26 cantons (26 * 45 + 100) + extra for menu/controls */
+}
+
+/* Add margin to push subsequent sections down */
+#transport-modes, #distance, #time {
+    margin-top: 50px; /* Extra space to prevent overlap */
+}
