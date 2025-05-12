@@ -133,3 +133,31 @@ h2 {
 #transport-modes, #distance, #time {
     margin-top: 50px; /* Extra space to prevent overlap */
 }
+
+/* Ensure race chart controls are correctly positioned */
+#commuters-canton #controls {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+#commuters-canton #playButton {
+    padding: 5px 15px;
+    border-radius: 4px;
+    background-color: #1A1A1A;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Ensure numbers in transport modes are visible */
+.transport-icon .number {
+    display: inline-block;
+    font-size: 14px;
+    color: #000000;
+    margin-left: 5px;
+    visibility: visible;
+}
