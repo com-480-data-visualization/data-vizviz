@@ -154,8 +154,23 @@
                         </defs>
                     </svg>
                 </div>
-               
+                <div class="legend">
+                    <div class="legend-item"><span class="color-box color-15"></span> 0-15 min</div>
+                    <div class="legend-item"><span class="color-box color-30"></span> 16-30 min</div>
+                    <div class="legend-item"><span class="color-box color-45"></span> 31-45 min</div>
+                    <div class="legend-item"><span class="color-box color-60"></span> 46-60 min</div>
+                    <div class="legend-item"><span class="color-box color-plus60"></span> >60 min</div>
+                </div>
+            </div>
+            <div class="info">
+                <p>The hand makes two complete rotations in 16 seconds, then stops. The arcs are built with the hand, display their number of commuters, and persist.</p>
+            </div>
+            <div id="error-message" class="error"></div>
+        </div>
+    </section>
 
+    <!-- Scripts -->
+    <!-- Leaflet for Map -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="map.js"></script>
     <!-- Chart.js for Bar Chart -->
@@ -164,6 +179,10 @@
     <!-- Bar Chart Race Scripts -->
     <script src="pendulaire_4.js"></script>
     <script src="race_chart.js"></script>
+    <!-- Clock Script -->
+    <script src="chart_horloge_script.js"></script>
+    <!-- Custom Script -->
+    <script src="website_script.js"></script>
     <!-- Inline Script for Transport Modes -->
     <script>
         // Pictogrammes pour chaque mode de transport
@@ -194,7 +213,7 @@
         // Fonction pour formater les nombres
         function formatNumber(num) {
             if (num === null || isNaN(num)) return "N/A";
-            return Math.round(num).toString();
+            return Math.round(num).toLocaleString(); // Use toLocaleString for better number formatting
         }
 
         // Fonction pour créer le graphique principal
@@ -202,6 +221,12 @@
             const chartContainer = document.getElementById('chart');
             chartContainer.innerHTML = '';
             
+            // Check if pendulaireData is defined
+            if (!window.pendulaireData) {
+                console.error("pendulaireData is not defined. Check pendulaire_2_js_v3.js");
+                return;
+            }
+
             const displayModes = pendulaireData.transport_modes.filter(mode => 
                 mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
                 mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
@@ -214,7 +239,7 @@
                 
                 const barContainer = document.createElement('div');
                 barContainer.className = 'bar-container';
-                barContainer.setAttribute('data-mode', mode);
+                barContainer\setAttribute('data-mode', mode);
                 
                 const label = document.createElement('div');
                 label.className = 'transport-label';
@@ -252,7 +277,11 @@
                 chartContainer.appendChild(barContainer);
                 
                 barContainer.addEventListener('click', function() {
-                    openComparisonModal(mode);
+                    if (typeof openComparisonModal === 'function') {
+                        openComparisonModal(mode);
+                    } else {
+                        console.warn('openComparisonModal is not defined');
+                    }
                 });
             });
         }
@@ -266,26 +295,26 @@
             bars.forEach((bar, index) => {
                 setTimeout(() => {
                     const mode = bar.closest('.bar-container').getAttribute('data-mode');
-                    console.log('Mode:', mode);
-                    
-                    const percentage = bar.getAttribute('data-percentage');
-                    const value = bar.getAttribute('data-value');
+                    const percentage = parseFloat(bar.getAttribute('data-percentage'));
+                    const value = parseFloat(bar.getAttribute('data-value'));
                     const formattedValue = formatNumber(value);
                     
                     const barWidth = bar.parentElement.offsetWidth;
                     const fillWidth = barWidth * percentage / 100;
                     
                     const emoji = transportIcons[mode] || '❓';
+                    // Ensure the number is displayed in a span
                     icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
                     
+                    // Position the icon at the end of the bar
                     icons[index].style.transform = `translateX(${fillWidth}px)`;
+                    icons[index].style.display = 'block'; // Ensure visibility
                     
                     bar.style.width = percentage + '%';
-                    bar.textContent = '';
+                    bar.textContent = ''; // Clear any text in bar
                     
                     const percentageEl = bar.parentElement.parentElement.nextElementSibling;
-                    percentageEl.textContent = parseFloat(percentage).toFixed(1) + '%';
-                    
+                    percentageEl.textContent = percentage.toFixed(1) + '%';
                 }, delay);
                 
                 delay += 800;
@@ -311,20 +340,20 @@
                 const mode = icon.parentElement.getAttribute('data-mode');
                 icon.innerHTML = transportIcons[mode] || '❓';
                 icon.style.transform = 'translateX(0)';
+                icon.style.display = 'block'; // Ensure visibility
             });
         }
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', () => {
-            createChart();
-            
-            document.getElementById('animateBtn').addEventListener('click', animateBars);
-            document.getElementById('resetBtn').addEventListener('click', resetAnimation);
+            try {
+                createChart();
+                document.getElementById('animateBtn').addEventListener('click', animateBars);
+                document.getElementById('resetBtn').addEventListener('click', resetAnimation);
+            } catch (error) {
+                console.error('Error initializing transport modes chart:', error);
+            }
         });
     </script>
-    <!-- Clock Script -->
-    <script src="chart_horloge_script.js"></script>
-    <!-- Custom Script -->
-    <script src="website_script.js"></script>
 </body>
 </html>
