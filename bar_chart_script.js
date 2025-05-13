@@ -16,7 +16,7 @@ const transportColors = {
     "à pied": "#3498db",
     "vélo": "#2ecc71",
     "vélo éléctrique": "#1abc9c",
-    "deux-roues motorisé (sans vélo électrique)": "e74c3c",
+    "deux-roues motorisé (sans vélo électrique)": "#e74c3c",
     "voiture": "#f39c12",
     "transports publics routiers": "#9b59b6",
     "train": "#34495e",
@@ -157,6 +157,7 @@ function animateBars() {
                 console.warn(`Icon at index ${index} not found`);
             }
             
+            // Animate bar
             bar.style.width = percentage + '%';
             bar.textContent = '';
             
