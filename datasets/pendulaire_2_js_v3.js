@@ -1,4 +1,4 @@
-const pendulaireData = {
+window.pendulaireData = {
   "years": [
     "1990",
     "2000",
