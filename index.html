@@ -57,7 +57,7 @@
         </div>
     </section>
 
-    <!-- Commuters per Canton Section/ Section (Bar Chart Race) -->
+    <!-- Commuters per Canton Section (Bar Chart Race) -->
     <section id="commuters-canton" class="section">
         <div class="container">
             <h2>Commuters per Canton</h2>
@@ -179,183 +179,11 @@
     <!-- Bar Chart Race Scripts -->
     <script src="scripts/pendulaire_4.js"></script>
     <script src="race_chart.js"></script>
+    <!-- Transport Modes Script -->
+    <script src="bar_chart_script.js"></script>
     <!-- Clock Script -->
     <script src="chart_horloge_script.js"></script>
     <!-- Custom Script -->
     <script src="website_script.js"></script>
-    <!-- Inline Script for Transport Modes -->
-    <script>
-        // Pictogrammes pour chaque mode de transport
-        const transportIcons = {
-            "à pied": "🚶",
-            "vélo": "🚲",
-            "vélo éléctrique": "🔋🚲",
-            "deux-roues motorisé (sans vélo électrique)": "🏍",
-            "voiture": "🚗",
-            "transports publics routiers": "🚌",
-            "train": "🚆",
-            "autres moyens de transport": "❓",
-            "Pendulaires dont le principal moyen de transport n'est pas connu": "�"
-        };
-
-        // Couleurs pour les différents modes de transport
-        const transportColors = {
-            "à pied": "#3498db",
-            "vélo": "#2ecc71",
-            "vélo éléctrique": "#1abc9c",
-            "deux-roues motorisé (sans vélo électrique)": "#e74c3c",
-            "voiture": "#f39c12",
-            "transports publics routiers": "#9b59b6",
-            "train": "#34495e",
-            "autres moyens de transport": "#7f8c8d"
-        };
-
-        // Fonction pour formater les nombres
-        function formatNumber(num) {
-            if (num === null || isNaN(num)) return "N/A";
-            return Math.round(num).toLocaleString(); // Use toLocaleString for better number formatting
-        }
-
-        // Fonction pour créer le graphique principal
-        function createChart() {
-            const chartContainer = document.getElementById('chart');
-            chartContainer.innerHTML = '';
-            
-            // Check if pendulaireData is defined
-            if (!window.pendulaireData) {
-                console.error("pendulaireData is not defined. Check pendulaire_2_js_v3.js");
-                chartContainer.innerHTML = '<p>Error: Transport modes data not loaded.</p>';
-                return;
-            }
-
-            const displayModes = pendulaireData.transport_modes.filter(mode => 
-                mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
-                mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
-            );
-            
-            displayModes.forEach(mode => {
-                const data = pendulaireData.values[mode]["2023"];
-                const percentage = data.pourcentage;
-                const nombre = data.nombre;
-                
-                const barContainer = document.createElement('div');
-                barContainer.className = 'bar-container';
-                barContainer.setAttribute('data-mode', mode);
-                
-                const label = document.createElement('div');
-                label.className = 'transport-label';
-                label.textContent = mode;
-                
-                const icon = document.createElement('div');
-                icon.className = 'transport-icon';
-                icon.innerHTML = transportIcons[mode] || '❓';
-                icon.style.color = transportColors[mode] || '#3498db';
-                
-                const barWrapper = document.createElement('div');
-                barWrapper.className = 'bar-wrapper';
-                
-                const bar = document.createElement('div');
-                bar.className = 'bar';
-                
-                const barFill = document.createElement('div');
-                barFill.className = 'bar-fill';
-                barFill.style.width = '0%';
-                barFill.setAttribute('data-percentage', percentage);
-                barFill.setAttribute('data-value', nombre);
-                barFill.style.backgroundColor = transportColors[mode] || '#3498db';
-                
-                const percentageEl = document.createElement('div');
-                percentageEl.className = 'percentage';
-                percentageEl.textContent = '0%';
-                
-                bar.appendChild(barFill);
-                barWrapper.appendChild(bar);
-                barContainer.appendChild(label);
-                barContainer.appendChild(icon);
-                barContainer.appendChild(barWrapper);
-                barContainer.appendChild(percentageEl);
-                
-                chartContainer.appendChild(barContainer);
-                
-                barContainer.addEventListener('click', function() {
-                    if (typeof openComparisonModal === 'function') {
-                        openComparisonModal(mode);
-                    } else {
-                        console.warn('openComparisonModal is not defined');
-                    }
-                });
-            });
-        }
-
-        // Fonction pour animer les barres avec les pictogrammes
-        function animateBars() {
-            const bars = document.querySelectorAll('.bar-fill');
-            const icons = document.querySelectorAll('.transport-icon');
-            let delay = 0;
-            
-            bars.forEach((bar, index) => {
-                setTimeout(() => {
-                    const mode = bar.closest('.bar-container').getAttribute('data-mode');
-                    const percentage = parseFloat(bar.getAttribute('data-percentage'));
-                    const value = parseFloat(bar.getAttribute('data-value'));
-                    const formattedValue = formatNumber(value);
-                    
-                    const barWidth = bar.parentElement.offsetWidth;
-                    const fillWidth = barWidth * percentage / 100;
-                    
-                    const emoji = transportIcons[mode] || '❓';
-                    // Ensure the number is displayed in a span
-                    icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
-                    
-                    // Position the icon at the end of the bar
-                    icons[index].style.transform = `translateX(${fillWidth}px)`;
-                    icons[index].style.display = 'block'; // Ensure visibility
-                    
-                    bar.style.width = percentage + '%';
-                    bar.textContent = ''; // Clear any text in bar
-                    
-                    const percentageEl = bar.parentElement.parentElement.nextElementSibling;
-                    percentageEl.textContent = percentage.toFixed(1) + '%';
-                }, delay);
-                
-                delay += 800;
-            });
-        }
-
-        // Fonction pour réinitialiser l'animation
-        function resetAnimation() {
-            const bars = document.querySelectorAll('.bar-fill');
-            const percentages = document.querySelectorAll('.percentage');
-            const icons = document.querySelectorAll('.transport-icon');
-            
-            bars.forEach(bar => {
-                bar.style.width = '0%';
-                bar.textContent = '';
-            });
-            
-            percentages.forEach(p => {
-                p.textContent = '0%';
-            });
-            
-            icons.forEach(icon => {
-                const mode = icon.parentElement.getAttribute('data-mode');
-                icon.innerHTML = transportIcons[mode] || '❓';
-                icon.style.transform = 'translateX(0)';
-                icon.style.display = 'block'; // Ensure visibility
-            });
-        }
-
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', () => {
-            try {
-                createChart();
-                document.getElementById('animateBtn').addEventListener('click', animateBars);
-                document.getElementById('resetBtn').addEventListener('click', resetAnimation);
-            } catch (error) {
-                console.error('Error initializing transport modes chart:', error);
-                document.getElementById('chart').innerHTML = '<p>Error: Failed to initialize transport modes chart.</p>';
-            }
-        });
-    </script>
 </body>
 </html>
