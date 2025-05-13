@@ -29,6 +29,26 @@ function formatNumber(num) {
     return Math.round(num).toLocaleString(); // Format with commas (e.g., 50,000)
 }
 
+// Fonction pour vérifier si pendulaireData est chargé
+function waitForPendulaireData(callback, maxAttempts = 20, interval = 500) {
+    let attempts = 0;
+    const checkData = setInterval(() => {
+        if (window.pendulaireData && pendulaireData.transport_modes && pendulaireData.values) {
+            clearInterval(checkData);
+            console.log("pendulaireData loaded successfully");
+            callback();
+        } else if (attempts >= maxAttempts) {
+            clearInterval(checkData);
+            console.error("Timeout: pendulaireData not loaded after", maxAttempts * interval, "ms");
+            const chartContainer = document.getElementById('chart');
+            if (chartContainer) {
+                chartContainer.innerHTML = '<p>Error: Failed to load transport modes data. Please check datasets/pendulaire_2_js_v3.js.</p>';
+            }
+        }
+        attempts++;
+    }, interval);
+}
+
 // Fonction pour créer le graphique principal
 function createChart() {
     const chartContainer = document.getElementById('chart');
@@ -38,7 +58,7 @@ function createChart() {
     }
     chartContainer.innerHTML = '';
 
-    // Check if pendulaireData is defined
+    // Vérifier pendulaireData
     if (!window.pendulaireData || !pendulaireData.transport_modes || !pendulaireData.values) {
         console.error("pendulaireData is not defined or invalid. Check pendulaire_2_js_v3.js");
         chartContainer.innerHTML = '<p>Error: Transport modes data not loaded.</p>';
@@ -347,47 +367,50 @@ function updateComparisonChart() {
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Initializing transport modes chart"); // Debug: Confirm initialization
     try {
-        createChart();
-        
-        const animateBtn = document.getElementById('animateBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        
-        if (animateBtn) {
-            animateBtn.addEventListener('click', () => {
-                console.log("Animate button clicked"); // Debug: Confirm click
-                animateBars();
-            });
-        } else {
-            console.error("Animate button not found");
-        }
-        
-        if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                console.log("Reset button clicked"); // Debug: Confirm click
-                resetAnimation();
-            });
-        } else {
-            console.error("Reset button not found");
-        }
-        
-        // Gestion du modal
-        const closeModal = document.querySelector('.close-modal');
-        if (closeModal) {
-            closeModal.addEventListener('click', closeComparisonModal);
-        } else {
-            console.warn("Close modal button not found");
-        }
-        
-        const modal = document.getElementById('comparisonModal');
-        if (modal) {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeComparisonModal();
-                }
-            });
-        } else {
-            console.warn("Comparison modal not found");
-        }
+        // Attendre que pendulaireData soit chargé
+        waitForPendulaireData(() => {
+            createChart();
+            
+            const animateBtn = document.getElementById('animateBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            if (animateBtn) {
+                animateBtn.addEventListener('click', () => {
+                    console.log("Animate button clicked"); // Debug: Confirm click
+                    animateBars();
+                });
+            } else {
+                console.error("Animate button not found");
+            }
+            
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    console.log("Reset button clicked"); // Debug: Confirm click
+                    resetAnimation();
+                });
+            } else {
+                console.error("Reset button not found");
+            }
+            
+            // Gestion du modal
+            const closeModal = document.querySelector('.close-modal');
+            if (closeModal) {
+                closeModal.addEventListener('click', closeComparisonModal);
+            } else {
+                console.warn("Close modal button not found");
+            }
+            
+            const modal = document.getElementById('comparisonModal');
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeComparisonModal();
+                    }
+                });
+            } else {
+                console.warn("Comparison modal not found");
+            }
+        });
     } catch (error) {
         console.error('Error initializing transport modes chart:', error);
         const chartContainer = document.getElementById('chart');
