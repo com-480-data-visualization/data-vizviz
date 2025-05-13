@@ -1,49 +1,55 @@
-/* Container for the entire chart */
+/* Container for the chart */
 #transport-modes .chart {
     max-width: 800px;
-    margin: 20px auto;
+    margin: 40px auto;
     padding: 10px;
 }
 
 /* Each bar container (label, icon, bar, percentage) */
-.bar-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+#transport-modes .bar-container {
     margin-bottom: 25px;
-    width: 100%;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     transition: transform 0.2s;
+    position: relative;
+    width: 100%;
 }
 
-.bar-container:hover {
+#transport-modes .bar-container:hover {
     transform: translateX(5px);
 }
 
 /* Transport label (e.g., "à pied") */
-.transport-label {
-    width: 200px;
+#transport-modes .transport-label {
+    width: 250px;
     font-weight: bold;
+    margin-right: 15px;
     font-size: 14px;
     color: #333;
-    text-align: right;
-    margin-right: 15px;
 }
 
 /* Transport icon (emoji + number) */
-.transport-icon {
-    width: 100px;
-    font-size: 18px;
+#transport-modes .transport-icon {
+    width: auto;
+    height: 40px;
+    margin-right: 15px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    font-size: 24px;
+    position: absolute;
+    left: 320px;
+    z-index: 2;
     transition: transform 1.5s ease-out;
+    transform: translateX(0);
     white-space: nowrap;
 }
 
 /* Number next to icon */
-.transport-icon .number {
+#transport-modes .transport-icon .number {
     margin-left: 5px;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
     color: #333;
     display: inline-block;
@@ -51,43 +57,50 @@
 }
 
 /* Wrapper for the bar */
-.bar-wrapper {
-    flex: 1;
-    height: 30px;
+#transport-modes .bar-wrapper {
+    flex-grow: 1;
     position: relative;
+    margin-left: 40px;
 }
 
 /* Bar background */
-.bar {
-    width: 100%;
-    height: 100%;
+#transport-modes .bar {
+    height: 40px;
     background-color: #e0e0e0;
     border-radius: 20px;
     overflow: hidden;
+    position: relative;
 }
 
 /* Filled portion of the bar */
-.bar-fill {
+#transport-modes .bar-fill {
     height: 100%;
     width: 0;
     border-radius: 20px;
     transition: width 1.5s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: white;
+    font-weight: bold;
+    box-sizing: border-box;
 }
 
 /* Percentage text */
-.percentage {
-    width: 60px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-    text-align: left;
+#transport-modes .percentage {
     margin-left: 10px;
+    width: 60px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
 }
 
 /* Controls (Start Animation, Reset) */
 #transport-modes .controls {
     text-align: center;
-    margin: 20px 0;
+    margin-top: 30px;
 }
 
 #transport-modes .controls button {
@@ -108,14 +121,14 @@
 
 /* Legend */
 #transport-modes .legend {
+    margin-top: 30px;
     text-align: center;
     font-size: 14px;
     color: #7f8c8d;
-    margin-top: 20px;
 }
 
 /* Modal styles */
-.modal {
+#transport-modes .modal {
     display: none;
     position: fixed;
     top: 0;
@@ -128,9 +141,9 @@
     align-items: center;
 }
 
-.modal-content {
+#transport-modes .modal-content {
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     width: 80%;
     max-width: 800px;
@@ -139,7 +152,7 @@
     position: relative;
 }
 
-.close-modal {
+#transport-modes .close-modal {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -148,19 +161,19 @@
     color: #7f8c8d;
 }
 
-.modal-title {
+#transport-modes .modal-title {
     margin-top: 0;
     color: #2c3e50;
 }
 
-.transport-selector {
+#transport-modes .transport-selector {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 20px;
 }
 
-.transport-option {
+#transport-modes .transport-option {
     padding: 8px 15px;
     background-color: #ecf0f1;
     border-radius: 20px;
@@ -168,12 +181,13 @@
     transition: all 0.3s;
 }
 
-.transport-option.selected {
+#transport-modes .transport-option.selected {
     background-color: #3498db;
     color: white;
 }
 
-.comparison-chart-container {
-    height: 300px;
+#transport-modes .comparison-chart-container {
+    height: 400px;
     margin-top: 20px;
+    position: relative;
 }
