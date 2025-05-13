@@ -23,31 +23,44 @@ const transportColors = {
     "autres moyens de transport": "#7f8c8d"
 };
 
-// Fonction pour formater les nombres sans virgules
+// Fonction pour formater les nombres avec virgules
 function formatNumber(num) {
     if (num === null || isNaN(num)) return "N/A";
-    return Math.round(num).toString(); // Retourne le nombre sans formattage
+    return Math.round(num).toLocaleString(); // Format with commas (e.g., 50,000)
 }
 
 // Fonction pour créer le graphique principal
 function createChart() {
     const chartContainer = document.getElementById('chart');
     chartContainer.innerHTML = '';
+
+    // Check if pendulaireData is defined
+    if (!window.pendulaireData) {
+        console.error("pendulaireData is not defined. Check pendulaire_2_js_v3.js");
+        chartContainer.innerHTML = '<p>Error: Transport modes data not loaded.</p>';
+        return;
+    }
     
+    console.log("pendulaireData:", pendulaireData); // Debug: Log data structure
+
     // Exclure le total et les données non connues
     const displayModes = pendulaireData.transport_modes.filter(mode => 
         mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
         mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
     );
     
+    console.log("displayModes:", displayModes); // Debug: Log filtered modes
+
     // Trouver la valeur maximale pour l'échelle
-    const maxValue = pendulaireData.values["voiture"]["2023"].pourcentage;
+    const maxValue = pendulaireData.values["voiture"]["2023"]?.pourcentage || 100;
     
     displayModes.forEach(mode => {
         const data = pendulaireData.values[mode]["2023"];
-        const percentage = data.pourcentage;
-        const nombre = data.nombre;
+        const percentage = data?.pourcentage || 0;
+        const nombre = data?.nombre || 0;
         
+        console.log(`Mode: ${mode}, Percentage: ${percentage}, Nombre: ${nombre}`); // Debug: Log each mode's data
+
         const barContainer = document.createElement('div');
         barContainer.className = 'bar-container';
         barContainer.setAttribute('data-mode', mode);
@@ -60,7 +73,7 @@ function createChart() {
         // Icône du transport (positionné absolument)
         const icon = document.createElement('div');
         icon.className = 'transport-icon';
-        icon.innerHTML = transportIcons[mode] || '';
+        icon.innerHTML = transportIcons[mode] || '❓';
         icon.style.color = transportColors[mode] || '#3498db';
         
         // Wrapper pour la barre
@@ -94,7 +107,11 @@ function createChart() {
         
         // Ajouter l'événement click pour ouvrir le modal
         barContainer.addEventListener('click', function() {
-            openComparisonModal(mode);
+            if (typeof openComparisonModal === 'function') {
+                openComparisonModal(mode);
+            } else {
+                console.warn('openComparisonModal is not defined');
+            }
         });
     });
 }
@@ -103,24 +120,35 @@ function createChart() {
 function animateBars() {
     const bars = document.querySelectorAll('.bar-fill');
     const icons = document.querySelectorAll('.transport-icon');
+    
+    console.log("Bars found:", bars.length); // Debug: Log number of bars
+    console.log("Icons found:", icons.length); // Debug: Log number of icons
+
     let delay = 0;
     
     bars.forEach((bar, index) => {
         setTimeout(() => {
-            const percentage = bar.getAttribute('data-percentage');
-            const value = bar.getAttribute('data-value');
+            const mode = bar.closest('.bar-container').getAttribute('data-mode');
+            const percentage = parseFloat(bar.getAttribute('data-percentage')) || 0;
+            const value = parseFloat(bar.getAttribute('data-value')) || 0;
             const formattedValue = formatNumber(value);
             
+            console.log(`Animating ${mode}: Percentage=${percentage}, Value=${formattedValue}`); // Debug: Log animation details
+
             const barWidth = bar.parentElement.offsetWidth;
             const fillWidth = barWidth * percentage / 100;
             
+            // Add icon and number
+            const emoji = transportIcons[mode] || '❓';
+            icons[index].innerHTML = `${emoji} <span class="number">${formattedValue}</span>`;
             icons[index].style.transform = `translateX(${fillWidth}px)`;
+            icons[index].style.display = 'block'; // Ensure visibility
             
             bar.style.width = percentage + '%';
             bar.textContent = '';
             
             const percentageEl = bar.parentElement.parentElement.nextElementSibling;
-            percentageEl.textContent = parseFloat(percentage).toFixed(1) + '%';
+            percentageEl.textContent = percentage.toFixed(1) + '%';
         }, delay);
         
         delay += 800;
@@ -143,7 +171,10 @@ function resetAnimation() {
     });
     
     icons.forEach(icon => {
+        const mode = icon.parentElement.getAttribute('data-mode');
+        icon.innerHTML = transportIcons[mode] || '❓';
         icon.style.transform = 'translateX(0)';
+        icon.style.display = 'block'; // Ensure visibility
     });
 }
 
@@ -281,16 +312,20 @@ function updateComparisonChart() {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    createChart();
-    
-    document.getElementById('animateBtn').addEventListener('click', animateBars);
-    document.getElementById('resetBtn').addEventListener('click', resetAnimation);
-    
-    // Gestion du modal
-    document.querySelector('.close-modal').addEventListener('click', closeComparisonModal);
-    document.getElementById('comparisonModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeComparisonModal();
-        }
-    });
+    try {
+        createChart();
+        document.getElementById('animateBtn').addEventListener('click', animateBars);
+        document.getElementById('resetBtn').addEventListener('click', resetAnimation);
+        
+        // Gestion du modal
+        document.querySelector('.close-modal').addEventListener('click', closeComparisonModal);
+        document.getElementById('comparisonModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeComparisonModal();
+            }
+        });
+    } catch (error) {
+        console.error('Error initializing transport modes chart:', error);
+        document.getElementById('chart').innerHTML = '<p>Error: Failed to initialize transport modes chart.</p>';
+    }
 });
