@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commuter Distance Visualization</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+  <link href="./distance_style.css" rel="stylesheet">
+</head>
+<body>
+  <h1 class="title animate-fadeIn">COMMUTER DISTANCE PER YEAR</h1>
+  <div class="slider-container">
+    <label for="yearSlider" class="slider-label">Select Year</label>
+    <input type="range" id="yearSlider" min="0" value="0">
+  </div>
+  <div class="dropdown-container">
+    <label for="compareYear" class="dropdown-label">Compare with:</label>
+    <select id="compareYear">
+      <option value="">None</option>
+    </select>
+  </div>
+  <button id="nextYearButton">Next Year →</button>
+
+  <script src="./distance_script.js"></script>
+</body>
+</html>
