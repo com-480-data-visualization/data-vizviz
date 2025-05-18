@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphique en Barres Circulaires Animé avec Aiguille et Cadran</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="styles_times.css">
+</head>
+<body>
+    <div id="chart-container">
+        <div id="title">COMMUTER TRAVEL TIME PER YEAR</div>
+        <div class="slider-container">
+            <label for="yearSlider" class="slider-label">Select Year</label>
+            <input type="range" id="yearSlider" min="0" max="15" value="15">
+        </div>
+        <div id="year">2023</div>
+        <button id="nextYearButton">Next Year →</button>
+        <div id="total">Total for year 1990: 0</div>
+        <div id="chart"></div>
+    </div>
+    <script src="script_times.js"></script>
+</body>
+</html>
