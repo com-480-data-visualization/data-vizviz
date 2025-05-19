@@ -36,6 +36,7 @@ let zoom;
 let svg;
 let g;
 let routeIndex; // Index for pendulaire_5.json
+let isSearching = false;
 
 // Load data
 Promise.all([
@@ -361,9 +362,30 @@ d3.select("#search-route").on("click", function() {
     
     if (fromCommune && toCommune) {
 
-        svg.call(zoom.transform, d3.zoomIdentity);
-        g.attr("transform", "");
-
+        // Set search flag to prevent updateVisualization
+        isSearching = true;
+        console.log("Search started: isSearching set to true");
+        
+        // Reset to initial map state
+        svg.call(zoom.transform, d3.zoomIdentity); // Reset zoom to initial state
+        g.attr("transform", ""); // Reset group transformation
+        
+        // Reset projection to initial state (as in initVisualization)
+        projection = d3.geoMercator()
+            .center([8.2, 46.8])
+            .scale(12000 * (width / 1000))
+            .translate([width / 2, height / 2]);
+        
+        path = d3.geoPath().projection(projection);
+        
+        // Redraw borders with initial projection
+        g.selectAll(".canton-border").attr("d", path);
+        g.selectAll(".national-border").attr("d", path);
+        
+        // Log for debugging
+        console.log("Initial reset: projection center", projection.center(), "zoom transform", d3.zoomTransform(svg.node()));
+        
+        // Set up projection for the selected route
         const midLon = (fromCommune.lon + toCommune.lon) / 2;
         const midLat = (fromCommune.lat + toCommune.lat) / 2;
         
@@ -381,8 +403,12 @@ d3.select("#search-route").on("click", function() {
         
         path = d3.geoPath().projection(projection);
         
+        // Update borders with new projection
         g.selectAll(".canton-border").attr("d", path);
         g.selectAll(".national-border").attr("d", path);
+        
+        // Log for debugging
+        console.log("Route projection applied: center", projection.center(), "scale", scale, "communes", fromCommune, toCommune);
         
         const route = [{
             fromX: projection([fromCommune.lon, fromCommune.lat])[0],
@@ -779,6 +805,11 @@ function zoomed(event) {
 }
 
 function updateVisualization() {
+    if (isSearching) {
+        console.log("updateVisualization skipped due to active search");
+        return;
+    }
+
     // Clear all map elements except borders
     g.selectAll(".route").remove();
     g.selectAll(".city-circle").remove();
