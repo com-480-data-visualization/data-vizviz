@@ -165,6 +165,22 @@ function initVisualization() {
         updateVisualization();
     });
 
+    d3.select("#reset-route").on("click", function() {
+        isSearching = false; // Exit search mode
+        selectedDeparture = null; // Clear selected cities
+        selectedArrival = null;
+        d3.select("#departure-city").property("value", "");
+        d3.select("#arrival-city").property("value", "");
+        try {
+            $("#departure-city, #arrival-city").val(null).trigger("change");
+        } catch (error) {
+            console.warn("Select2 reset failed:", error);
+        }
+        svg.call(zoom.transform, d3.zoomIdentity); // Reset zoom to initial state
+        g.attr("transform", ""); // Reset group transformation
+        updateVisualization(); // Restore current view mode
+    });
+
     // Update dimensions on resize
     window.addEventListener('resize', () => {
         updateDimensions();
