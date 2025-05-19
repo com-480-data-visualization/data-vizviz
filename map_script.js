@@ -165,7 +165,6 @@ function initVisualization() {
         updateVisualization();
     });
 
-    });
 
     // Update dimensions on resize
     window.addEventListener('resize', () => {
