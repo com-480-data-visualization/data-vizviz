@@ -361,21 +361,8 @@ d3.select("#search-route").on("click", function() {
     
     if (fromCommune && toCommune) {
 
-        // Reset to initial map state
-        svg.call(zoom.transform, d3.zoomIdentity); // Reset zoom to initial state
-        g.attr("transform", ""); // Reset group transformation
-
-        // Reset projection to initial state (as in initVisualization)
-        projection = d3.geoMercator()
-            .center([8.2, 46.8])
-            .scale(12000 * (width / 1000))
-            .translate([width / 2, height / 2]);
-
-        path = d3.geoPath().projection(projection);
-
-        // Redraw borders with initial projection
-        g.selectAll(".canton-border").attr("d", path);
-        g.selectAll(".national-border").attr("d", path);
+        svg.call(zoom.transform, d3.zoomIdentity);
+        g.attr("transform", "");
 
         const midLon = (fromCommune.lon + toCommune.lon) / 2;
         const midLat = (fromCommune.lat + toCommune.lat) / 2;
