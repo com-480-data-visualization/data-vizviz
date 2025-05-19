@@ -131,11 +131,37 @@ function initVisualization() {
     // Set up event listeners for dropdowns
     d3.select("#view-mode").on("change", function() {
         currentView = this.value;
+        isSearching = false; // Reset search state
+        selectedDeparture = null; // Clear selected cities
+        selectedArrival = null;
+        d3.select("#departure-city").property("value", "");
+        d3.select("#arrival-city").property("value", "");
+        try {
+            $("#departure-city, #arrival-city").val(null).trigger("change");
+        } catch (error) {
+            console.warn("Select2 reset failed:", error);
+        }
+        svg.call(zoom.transform, d3.zoomIdentity); // Reset zoom
+        g.attr("transform", ""); // Reset group transformation
         updateVisualization();
     });
-
+    
     d3.select("#year").on("change", function() {
         currentYear = this.value;
+        if (isSearching) {
+            isSearching = false; // Reset search state if changing year
+            selectedDeparture = null;
+            selectedArrival = null;
+            d3.select("#departure-city").property("value", "");
+            d3.select("#arrival-city").property("value", "");
+            try {
+                $("#departure-city, #arrival-city").val(null).trigger("change");
+            } catch (error) {
+                console.warn("Select2 reset failed:", error);
+            }
+            svg.call(zoom.transform, d3.zoomIdentity); // Reset zoom
+            g.attr("transform", ""); // Reset group transformation
+        }
         updateVisualization();
     });
 
