@@ -1,0 +1,145 @@
+.commuters .section {
+  background-color: #484848;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  min-height: calc(100vh - 80px); /* Account for ~80px header */
+  box-sizing: border-box;
+}
+
+.commuters .chart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.commuters .chartBox {
+  width: 65%;
+  max-width: 800px;
+  background-color: #484848;
+  position: relative;
+  border-radius: 8px;
+  border: solid 2px #484848;
+  overflow: hidden;
+  margin-top: 30px;
+  height: 705px; /* 20 bars (30px) + 21 gaps (5px) = 600 + 105 = 705px */
+}
+
+.commuters .controls-panel {
+  width: 30%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #484848;
+  border-radius: 8px;
+}
+
+.commuters .bar-container {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  margin: 5px 0;
+  transition: top 0.5s ease-out;
+  display: flex;
+  align-items: center;
+}
+
+.commuters .bar {
+  height: 100%;
+  margin-left: 120px;
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  transition: width 0.5s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  color: #ffffff;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  margin-left: 130px; /* Espace entre le label et la barre */
+  position: static;
+  left: 140px;
+}
+
+.commuters .bar-label {
+  position: absolute;
+  left: 10px; /* Position du label à gauche */
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  width: 120px; /* Largeur disponible pour le texte */
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+}
+
+.commuters h2 {
+  font-size: 1.8rem;
+  text-align: center;
+  margin: 10px 0;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.commuters #selector {
+  text-align: center;
+}
+
+.commuters .custom-select {
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 4px;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #ccc;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  width: 100%;
+  max-width: 250px;
+}
+
+.commuters #yearLabel {
+  text-align: center;
+  font-size: 5rem;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+}
+
+.commuters #error-message {
+  color: #ff6f61;
+  text-align: center;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.commuters #controls {
+  display: flex;
+  justify-content: center;
+}
+
+.commuters button {
+  padding: 8px 20px;
+  border-radius: 4px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.commuters button:hover {
+  background-color: #333333;
+}
+
+.commuters #selector label {
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}

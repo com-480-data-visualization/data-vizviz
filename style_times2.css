@@ -1,0 +1,176 @@
+/* Scope all styles to the animation container */
+#time-chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px; /* Constrain width to prevent overflow */
+    width: 100%;
+    height: calc(100vh - 240px); /* Ensure it fits within viewport minus header and h2 */
+    position: relative;
+    font-family: 'Roboto', sans-serif; /* Apply font only to animation */
+    color: #fff;
+}
+
+/* Apply box-sizing only to animation elements */
+#time-chart-container * {
+    box-sizing: border-box;
+}
+
+/* Header (simulated for positioning, remove for website integration) */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #8B0000;
+    z-index: 1000;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-title {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.header-title-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Container (remove for website integration) */
+.container {
+    height: 100vh;
+}
+
+/* Section (remove for website integration) */
+.section {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    margin-top: 120px;
+    background-color: #646464; /* Matches #time section */
+}
+
+.section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#time-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#time-year {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#time-chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Allow chart to take available space */
+    max-height: 700px; /* Constrain chart height */
+    width: 100%;
+}
+
+.time-slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.time-slider-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+#time-chart-container input[type="range"] {
+    -webkit-appearance: none;
+    width: 300px;
+    height: 8px;
+    background: linear-gradient(to right, #a30000 0%, #a30000 var(--slider-progress, 0%), #D1D5DB var(--slider-progress, 0%), #D1D5DB 100%);
+    border-radius: 4px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+#time-chart-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #a30000; /* Matches website button color */
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+#time-chart-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+#time-chart-container input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #a30000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#time-nextYearButton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #a30000; /* Matches website button color */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.2s;
+    position: absolute;
+    bottom: 100px; /* Positioned just below animation */
+    right: 20px;
+}
+
+#time-nextYearButton:hover {
+    background-color: #b22222;
+    transform: translateY(-2px);
+}
+
+#time-nextYearButton:active {
+    transform: translateY(0);
+}
+
+#time-total {
+    font-size: 1.2rem;
+    font-weight: 500;
+    position: absolute;
+    bottom: 100px; /* Aligned with button */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    color: #fff;
+}

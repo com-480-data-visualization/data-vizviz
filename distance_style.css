@@ -1,0 +1,263 @@
+.distance .section {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  margin-top: 120px;
+}
+
+.distance .section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.distance .visualization-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1300px;
+}
+
+.distance .controls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.distance .canvas-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.distance canvas {
+  display: block;
+  border-radius: 6px;
+  background-color: #727272;
+}
+
+.distance .slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.distance .dropdown-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.distance .slider-label,
+.distance .dropdown-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.distance select {
+  padding: 8px 28px 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #484848;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  width: 120px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.distance select option {
+  color: #fff;
+  background: #2c2c2c;
+}
+
+.distance select:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.distance input[type="range"] {
+  -webkit-appearance: none;
+  width: 300px;
+  height: 8px;
+  background: linear-gradient(to right, #a30000 0%, #a30000 var(--slider-progress, 0%), #484848 var(--slider-progress, 0%), #484848 100%);
+  border-radius: 6px;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.distance input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #a30000;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.distance input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.distance input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #a30000;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.distance #nextYearButton {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #a30000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.2s;
+  position: absolute;
+  font-family: 'Roboto', sans-serif;
+}
+
+.distance #nextYearButton:hover {
+  background-color: #b22222;
+  transform: translateY(-2px);
+}
+
+.distance #nextYearButton:active {
+  transform: translateY(0);
+}
+
+.distance .animate-fadeIn {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.distance .distance-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.distance .distance-controls {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.distance .distance-visualization {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.distance #distance-canvas-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.distance .distance-side-controls {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding-top: 50px;
+}
+
+.distance .distance-slider-container {
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: center;
+  transform: translateX(-20px);
+}
+
+.distance .distance-slider-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.distance .distance-dropdown-container {
+  margin-bottom: 10px;
+}
+
+.distance .distance-dropdown-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.distance .distance-next-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  background: #a30000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+  margin-top: auto;
+  margin-bottom: 20px;
+  position: relative;
+  bottom: 0;
+}
+
+.distance .distance-next-button:hover {
+  background-color: #b22222;
+}
+
+@media (max-width: 768px) {
+  .distance .distance-visualization {
+      flex-direction: column;
+  }
+  
+  .distance .distance-side-controls {
+      width: 100%;
+      padding-top: 20px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .distance #distance-canvas-container {
+      margin-right: 0;
+      margin-bottom: 20px;
+  }
+  
+  .distance .distance-next-button {
+      margin-top: 0;
+      margin-bottom: 10px;
+  }
+  
+  .distance .distance-slider-container {
+      transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
