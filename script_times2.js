@@ -1,3 +1,7 @@
+// Expose functions globally
+window.updateYear = updateYear;
+window.drawCircle = drawCircle;
+
 // JSON data (time categories only, with corrected years)
 const jsonData = {
     "time": {  
@@ -88,7 +92,7 @@ const jsonData = {
                 "2018": { "nombre": 301298, "part": 8.8 },
                 "2019": { "nombre": 303310, "part": 8.7 },
                 "2020": { "nombre": 273521, "part": 8.2 },
-                "2011": { "nombre": 276643, "part": 8.3 },
+                "2021": { "nombre": 276643, "part": 8.3 },
                 "2022": { "nombre": 299835, "part": 8.7 },
                 "2023": { "nombre": 318921, "part": 9.0 }
             },
@@ -584,6 +588,5 @@ async function drawCircle(resetAnimation = false) {
         });
 }
 
-// Initial draw with animation
+// Initial setup without animation
 updateYear();
-drawCircle(true);
