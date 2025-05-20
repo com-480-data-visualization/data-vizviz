@@ -1,3 +1,7 @@
+// Expose functions globally
+window.createChart = createChart;
+window.animateBars = animateBars;
+
 // Dataset integrated directly into the script
 const pendulaireDataCommuters = {
     "years_transport": [
@@ -213,7 +217,7 @@ const pendulaireDataCommuters = {
       }
     }
   };
-  
+
   // Pictogrammes pour chaque mode de transport
   const transportIcons = {
       "à pied": "🚶",
@@ -226,7 +230,7 @@ const pendulaireDataCommuters = {
       "autres moyens de transport": "❓",
       "Pendulaires dont le principal moyen de transport n'est pas connu": "�"
   };
-  
+
   // Couleurs pour les différents modes de transport
   const transportColors = {
       "à pied": "#3498db",
@@ -238,17 +242,17 @@ const pendulaireDataCommuters = {
       "train": "#34495e",
       "autres moyens de transport": "#7f8c8d"
   };
-  
+
   // Fonction pour formater les nombres
   function formatNumber(num) {
       if (num === null || isNaN(num)) return "N/A";
       return Math.round(num).toLocaleString('fr-CH');
   }
-  
+
   function createChart(year) {
     const chartContainer = document.getElementById('chart');
     chartContainer.innerHTML = '';
-    
+
     // Mettre à jour le titre avec l'année
     const title = document.querySelector('#transport.section h2') || document.querySelector('.section h2');
     if (title) {
@@ -256,80 +260,80 @@ const pendulaireDataCommuters = {
     } else {
         console.warn('No title element found for selector #transport.section h2 or .section h2');
     }
-    
+
     // Exclure le total et les données non connues
     const displayModes = pendulaireDataCommuters.transport_modes.filter(mode => 
         mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
         mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
     );
-    
+
     displayModes.forEach(mode => {
         const data = pendulaireDataCommuters.values[mode][year];
         const percentage = data ? data.pourcentage : 0;
         const nombre = data ? data.nombre : 0;
-        
+
         const barContainer = document.createElement('div');
         barContainer.className = 'bar-container';
         barContainer.setAttribute('data-mode', mode);
-        
+
         // Label du transport
         const label = document.createElement('div');
         label.className = 'transport-label';
         label.textContent = mode;
-        
+
         // Icône du transport
         const icon = document.createElement('div');
         icon.className = 'transport-icon';
         icon.innerHTML = transportIcons[mode] || '';
         icon.style.color = transportColors[mode] || '#3498db';
-        
+
         // Wrapper pour la barre
         const barWrapper = document.createElement('div');
         barWrapper.className = 'bar-wrapper';
-        
+
         // Barre de progression
         const bar = document.createElement('div');
         bar.className = 'bar';
-        
+
         const barFill = document.createElement('div');
         barFill.className = 'bar-fill';
         barFill.style.width = '0%';
         barFill.setAttribute('data-percentage', percentage);
         barFill.setAttribute('data-value', nombre);
         barFill.style.backgroundColor = transportColors[mode] || '#3498db';
-        
+
         // Pourcentage
         const percentageEl = document.createElement('div');
         percentageEl.className = 'percentage';
         percentageEl.textContent = '0%';
-        
+
         bar.appendChild(barFill);
         barWrapper.appendChild(bar);
         barContainer.appendChild(label);
         barContainer.appendChild(icon);
         barContainer.appendChild(barWrapper);
         barContainer.appendChild(percentageEl);
-        
+
         chartContainer.appendChild(barContainer);
-        
+
         // Ajouter l'événement click pour ouvrir le modal
         barContainer.addEventListener('click', function() {
             openComparisonModal(mode);
         });
     });
-}
-  
+  }
+
   // Fonction pour animer les barres avec les pictogrammes
   function animateBars(year) {
       const bars = document.querySelectorAll('.bar-fill');
       const icons = document.querySelectorAll('.transport-icon');
       let delay = 0;
-      
+
       bars.forEach((bar, index) => {
           setTimeout(() => {
               const percentage = parseFloat(bar.getAttribute('data-percentage'));
               const value = bar.getAttribute('data-value');
-              
+
               // Calculer la largeur de la barre
               const barWidth = bar.parentElement.offsetWidth; // Total rectangle width
               const maxPercentage = Math.max(...pendulaireDataCommuters.transport_modes
@@ -343,44 +347,44 @@ const pendulaireDataCommuters = {
               const proportionalWidth = ((barWidth - fixedWidth) * (percentage / maxPercentage)); // Proportional width in pixels
               const totalWidth = proportionalWidth + fixedWidth; // Total width in pixels
               const totalWidthPercentage = (totalWidth / barWidth) * 100; // Convert back to percentage for CSS
-              
+
               // Animer l'icône
               icons[index].style.transform = `translateX(${totalWidth}px)`;
-              
+
               // Animer la barre
               bar.style.width = `${totalWidthPercentage}%`;
               bar.textContent = formatNumber(value);
-              
+
               // Mettre à jour le pourcentage affiché
               const percentageEl = bar.parentElement.parentElement.nextElementSibling;
               percentageEl.textContent = percentage.toFixed(1) + '%';
-              
+
           }, delay);
-          
+
           delay += 800;
       });
   }
-  
+
   // Fonction pour réinitialiser l'animation
   function resetAnimation() {
       const bars = document.querySelectorAll('.bar-fill');
       const percentages = document.querySelectorAll('.percentage');
       const icons = document.querySelectorAll('.transport-icon');
-      
+
       bars.forEach(bar => {
           bar.style.width = '0%';
           bar.textContent = '';
       });
-      
+
       percentages.forEach(p => {
           p.textContent = '0%';
       });
-      
+
       icons.forEach(icon => {
           icon.style.transform = 'translateX(0)';
       });
   }
-  
+
   // Fonction pour initialiser le menu déroulant des années
   function initializeYearSelector() {
       const yearSelect = document.getElementById('year-select');
@@ -393,67 +397,67 @@ const pendulaireDataCommuters = {
           yearSelect.appendChild(option);
       });
   }
-  
+
   // Fonctions pour le modal de comparaison
   let comparisonChart = null;
   const selectedTransports = new Set();
-  
+
   function openComparisonModal(initialMode) {
       const modal = document.getElementById('comparisonModal');
       const selector = document.getElementById('transportSelector');
-      
+
       // Réinitialiser le sélecteur
       selector.innerHTML = '';
       selectedTransports.clear();
-      
+
       // Ajouter les options de transport
       pendulaireDataCommuters.transport_modes.forEach(mode => {
           if (mode === "Total des pendulaires dont le principal moyen de transport est connu" || 
               mode === "Pendulaires dont le principal moyen de transport n'est pas connu") {
               return;
           }
-          
+
           const option = document.createElement('div');
           option.className = 'transport-option';
           option.textContent = mode;
           option.style.border = `2px solid ${transportColors[mode] || '#3498db'}`;
           option.setAttribute('data-mode', mode);
-          
+
           if (mode === initialMode) {
               option.classList.add('selected');
               selectedTransports.add(mode);
           }
-          
+
           option.addEventListener('click', function() {
               this.classList.toggle('selected');
-              
+
               if (this.classList.contains('selected')) {
                   selectedTransports.add(mode);
               } else {
                   selectedTransports.delete(mode);
               }
-              
+
               updateComparisonChart();
           });
-          
+
           selector.appendChild(option);
       });
-      
+
       // Afficher le modal
       modal.style.display = 'flex';
-      
+
       // Mettre à jour le graphique
       updateComparisonChart();
   }
-  
+
   function closeComparisonModal() {
       document.getElementById('comparisonModal').style.display = 'none';
   }
-  
+
   function updateComparisonChart() {
       const ctx = document.getElementById('comparisonChart').getContext('2d');
       const years = pendulaireDataCommuters.years_transport.filter(y => y !== "1990" && y !== "2000").concat(["1990", "2000"]);
-      
+
       const datasets = Array.from(selectedTransports).map(mode => {
           return {
               label: mode,
@@ -470,11 +474,11 @@ const pendulaireDataCommuters = {
               pointHoverRadius: 7
           };
       });
-      
+
       if (comparisonChart) {
           comparisonChart.destroy();
       }
-      
+
       comparisonChart = new Chart(ctx, {
           type: 'line',
           data: {
@@ -569,50 +573,32 @@ const pendulaireDataCommuters = {
           }
       });
   }
-  
+
   // Initialisation
   document.addEventListener('DOMContentLoaded', () => {
       // Initialiser le menu déroulant
       initializeYearSelector();
-      
+
       // Créer le graphique pour l'année par défaut (2023)
       let currentYear = "2023";
       createChart(currentYear);
-      
-      // Lancer l'animation automatiquement après 1 seconde
-      setTimeout(() => {
-          animateBars(currentYear);
-      }, 1000);
-      
+
       // Ajouter un écouteur pour le changement d'année
       document.getElementById('year-select').addEventListener('change', function() {
           currentYear = this.value;
           createChart(currentYear);
           resetAnimation();
-          // Lancer l'animation automatiquement après changement d'année
-          setTimeout(() => {
-              animateBars(currentYear);
-          }, 1000);
+          // Note: Removed auto-animate here; animation triggered by Intersection Observer or user interaction
       });
-      
+
       document.getElementById('animateBtn').addEventListener('click', () => animateBars(currentYear));
       document.getElementById('resetBtn').addEventListener('click', resetAnimation);
-      
+
       // Gestion du modal
       document.querySelector('.close-modal').addEventListener('click', closeComparisonModal);
       document.getElementById('comparisonModal').addEventListener('click', function(e) {
           if (e.target === this) {
               closeComparisonModal();
-          }
-      });
-  
-      // Handle slim header behavior for transport section only
-      window.addEventListener('scroll', () => {
-          const section = document.querySelector('#transport.section');
-          if (window.scrollY > 50) {
-              section.classList.add('slim');
-          } else {
-              section.classList.remove('slim');
           }
       });
   });
