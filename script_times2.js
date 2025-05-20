@@ -271,7 +271,7 @@ async function drawCircle(resetAnimation = false) {
 
     // Append legend
     const legendGroup = svg.append("g")
-        .attr("transform", `translate(400, -90)`);
+        .attr("transform", `translate(400, -150)`);
 
     legendGroup.selectAll("rect")
         .data(legendData)
