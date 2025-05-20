@@ -1,3 +1,6 @@
+// Expose start function globally
+window.startDistanceAnimation = startDistanceAnimation;
+
 let table;
 let years_distance = [];
 let distances = ['0–1 km', '1.1–5 km', '5.1–10 km', '10.1–50 km', 'Plus de 50 km'];
@@ -5,7 +8,8 @@ let currentYearIndex_distance = 0;
 let animationProgress = 0;
 let carX = 50;
 let maxCommuters = 0;
-let isAnimationPaused = false;
+let isAnimationPaused = true;
+let isAnimationStarted = false; // New flag to control animation start
 let yearTransitionProgress = 0;
 let isYearTransitioning = false;
 let isCarExiting = false;
@@ -119,80 +123,99 @@ function updateSliderProgress() {
   slider.style.setProperty('--slider-progress', `${progress}%`);
 }
 
+function startDistanceAnimation() {
+  console.log('Starting distance animation'); // Debug log
+  animationProgress = 0;
+  carX = 50;
+  isAnimationPaused = false;
+  isAnimationStarted = true; // Enable animation in draw()
+  isCarExiting = false;
+  carExitProgress = 0;
+  yearTransitionProgress = 0;
+  isYearTransitioning = false;
+  compareYear = ''; // Reset comparison
+  document.getElementById('compareYear').value = ''; // Reset dropdown
+  updateSliderProgress();
+}
+
 function setup() {
-    // Create canvas and attach to distance-canvas-container
-    let canvasContainer = document.getElementById('distance-canvas-container');
-    if (!canvasContainer) {
-      console.error('Canvas container not found!');
-      return;
-    }
-    
-    let canvas = createCanvas(800, 400);
-    canvas.parent('distance-canvas-container');
-    textAlign(CENTER, TOP);
-    textSize(14);
+  // Create canvas and attach to distance-canvas-container
+  let canvasContainer = document.getElementById('distance-canvas-container');
+  if (!canvasContainer) {
+    console.error('Canvas container not found!');
+    return;
+  }
   
-    // Extract years and calculate max commuters
-    let yearSet = new Set();
-    for (let r = 0; r < table.getRowCount(); r++) {
-      let year = table.getString(r, 'Year');
-      yearSet.add(year);
-      let commuters = table.getNum(r, 'Commuters');
-      if (commuters > maxCommuters) maxCommuters = commuters;
-    }
-    years_distance = Array.from(yearSet).sort();
-  
-    // Initialize year slider
-    let slider = document.getElementById('yearSlider');
-    slider.max = years_distance.length - 1;
-    slider.oninput = () => {
-      currentYearIndex_distance = parseInt(slider.value);
-      animationProgress = 0;
-      carX = 50;
-      isAnimationPaused = false;
-      yearTransitionProgress = 0;
-      isYearTransitioning = false;
-      isCarExiting = false;
-      carExitProgress = 0;
-      updateSliderProgress();
-    };
-  
-    // Initialize compare year dropdown
-    let dropdown = document.getElementById('compareYear');
-    // Clear existing options except the first "None" option
-    while (dropdown.options.length > 1) {
-      dropdown.remove(1);
-    }
-    // Add year options
-    years_distance.forEach(year => {
-      let option = document.createElement('option');
-      option.value = year;
-      option.text = year;
-      dropdown.appendChild(option);
-    });
-    dropdown.onchange = () => {
-      compareYear = dropdown.value;
-      animationProgress = 0;
-      carX = 50;
-      isAnimationPaused = false;
-      isCarExiting = false;
-      carExitProgress = 0;
-    };
-  
-    // Initialize next year button
-    let button = document.getElementById('nextYearButton');
-    button.onclick = () => {
-      if (!isCarExiting) {
-        isCarExiting = true;
-        carExitProgress = 0;
-        carExitStartX = carX;
-        animationProgress = animationDuration;
-        isAnimationPaused = true;
-      }
-    };
-  
-    // Initial UI update
+  let canvas = createCanvas(800, 400);
+  canvas.parent('distance-canvas-container');
+  textAlign(CENTER, TOP);
+  textSize(14);
+
+  // Extract years and calculate max commuters
+  let yearSet = new Set();
+  for (let r = 0; r < table.getRowCount(); r++) {
+    let year = table.getString(r, 'Year');
+    yearSet.add(year);
+    let commuters = table.getNum(r, 'Commuters');
+    if (commuters > maxCommuters) maxCommuters = commuters;
+  }
+  years_distance = Array.from(yearSet).sort();
+
+  // Initialize year slider
+  let slider = document.getElementById('yearSlider');
+  slider.max = years_distance.length - 1;
+  slider.oninput = () => {
+    currentYearIndex_distance = parseInt(slider.value);
+    animationProgress = 0;
+    carX = 50;
+    isAnimationPaused = false;
+    isAnimationStarted = true; // Allow animation on slider change
+    yearTransitionProgress = 0;
+    isYearTransitioning = false;
+    isCarExiting = false;
+    carExitProgress = 0;
     updateSliderProgress();
+  };
+
+  // Initialize compare year dropdown
+  let dropdown = document.getElementById('compareYear');
+  // Clear existing options except the first "None" option
+  while (dropdown.options.length > 1) {
+    dropdown.remove(1);
+  }
+  // Add year options
+  years_distance.forEach(year => {
+    let option = document.createElement('option');
+    option.value = year;
+    option.text = year;
+    dropdown.appendChild(option);
+  });
+  dropdown.onchange = () => {
+    compareYear = dropdown.value;
+    animationProgress = 0;
+    carX = 50;
+    isAnimationPaused = false;
+    isAnimationStarted = true; // Allow animation on dropdown change
+    isCarExiting = false;
+    carExitProgress = 0;
+  };
+
+  // Initialize next year button
+  let button = document.getElementById('nextYearButton');
+  button.onclick = () => {
+    if (!isCarExiting) {
+      isCarExiting = true;
+      carExitProgress = 0;
+      carExitStartX = carX;
+      animationProgress = animationDuration;
+      isAnimationPaused = true;
+    }
+  };
+
+  // Initial UI update
+  updateSliderProgress();
+  isAnimationPaused = true; // Prevent animation progression
+  isAnimationStarted = false; // Prevent animation rendering
 }
 
 function draw() {
@@ -204,6 +227,7 @@ function draw() {
   let barY = 300;
   let segmentDuration = animationDuration / distances.length;
 
+  // Draw static elements (axes, labels, year text)
   let axisX = 60;
   let tickInterval = 250000;
   let numTicks = Math.floor(maxCommuters / tickInterval) + 1;
@@ -239,6 +263,56 @@ function draw() {
   stroke(0);
   strokeWeight(1);
 
+  // Draw distance labels
+  fill('#fff'); // White text to match website
+  for (let i = 0; i < distances.length; i++) {
+    let x = startX + i * (barWidth + barSpacing);
+    let displayLabel = distances[i] === 'Plus de 50 km' ? '> 50 km' : distances[i];
+    text(displayLabel, x + barWidth / 2, barY + 20);
+  }
+
+  // Draw year text
+  textSize(36);
+  if (isYearTransitioning) {
+    push();
+    translate(width / 2, 14);
+    let progress = yearTransitionProgress / yearTransitionDuration;
+    let scaleY = cos(PI * progress);
+    let offsetY = 20 * sin(PI * progress);
+    scale(1, scaleY);
+    if (compareYear) {
+      fill('#a30000'); // Match website button color
+      text(year, -50, offsetY);
+      fill('#fff'); // White text for "vs"
+      text('  vs ', 15, offsetY);
+      fill('#565656'); // Lighter gray for compare year
+      text(compareYear, 90, offsetY);
+    } else {
+      fill('#fff'); // White text to match website
+      text(year, 0, offsetY);
+    }
+    pop();
+  } else {
+    if (compareYear) {
+      fill('#a30000'); // Match website button color
+      text(year, width / 2 - 50, 2);
+      fill('#fff'); // White text for "vs"
+      text('  vs ', width / 2 + 15, 2);
+      fill('#565656'); // Lighter gray for compare year
+      text(compareYear, width / 2 + 90, 2);
+    } else {
+      fill('#fff'); // White text to match website
+      text(year, 0, 2);
+    }
+  }
+  textSize(14);
+
+  // Skip animation rendering if not started
+  if (!isAnimationStarted) {
+    return; // Exit draw() to prevent bar and car rendering
+  }
+
+  // Draw animated elements (bars and car)
   for (let i = 0; i < distances.length; i++) {
     let distance = distances[i];
     let row = rows.find(r => r.getString('Distance_Category') === distance);
@@ -317,53 +391,7 @@ function draw() {
     }
   }
 
-  fill('#fff'); // White text to match website
-  for (let i = 0; i < distances.length; i++) {
-    let x = startX + i * (barWidth + barSpacing);
-    let displayLabel = distances[i] === 'Plus de 50 km' ? '> 50 km' : distances[i];
-    text(displayLabel, x + barWidth / 2, barY + 20);
-  }
-
-  textSize(36);
-  if (isYearTransitioning) {
-    push();
-    translate(width / 2, 14);
-    let progress = yearTransitionProgress / yearTransitionDuration;
-    let scaleY = cos(PI * progress);
-    let offsetY = 20 * sin(PI * progress);
-    scale(1, scaleY);
-    if (compareYear) {
-      fill('#a30000'); // Match website button color
-      text(year, -50, offsetY);
-      fill('#fff'); // White text for "vs"
-      text('  vs ', 15, offsetY);
-      fill('#565656'); // Lighter gray for compare year
-      text(compareYear, 90, offsetY);
-    } else {
-      fill('#fff'); // White text to match website
-      text(year, 0, offsetY);
-    }
-    pop();
-    yearTransitionProgress += 1;
-    if (yearTransitionProgress >= yearTransitionDuration) {
-      isYearTransitioning = false;
-      yearTransitionProgress = 0;
-    }
-  } else {
-    if (compareYear) {
-      fill('#a30000'); // Match website button color
-      text(year, width / 2 - 50, 2);
-      fill('#fff'); // White text for "vs"
-      text('  vs ', width / 2 + 15, 2);
-      fill('#565656'); // Lighter gray for compare year
-      text(compareYear, width / 2 + 90, 2);
-    } else {
-      fill('#fff'); // White text to match website
-      text(year, width / 2, 2);
-    }
-  }
-  textSize(14);
-
+  // Draw car
   let carY = 350;
   if (isCarExiting) {
     carX = map(carExitProgress, 0, carExitDuration, carExitStartX, 900);
@@ -392,6 +420,7 @@ function draw() {
   pop();
   textSize(14);
 
+  // Update animation progress
   if (!isAnimationPaused && !isCarExiting) {
     animationProgress += 1;
     if (animationProgress >= animationDuration) {
