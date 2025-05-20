@@ -16,58 +16,6 @@
     box-sizing: border-box;
 }
 
-/* Header (simulated for positioning, remove for website integration) */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #8B0000;
-    z-index: 1000;
-    padding: 10px 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    height: 120px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.header-title {
-    text-align: center;
-    padding: 10px 0;
-}
-
-.header-title-text {
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-/* Container (remove for website integration) */
-.container {
-    height: 100vh;
-}
-
-/* Section (remove for website integration) */
-.section {
-    min-height: calc(100vh - 120px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    margin-top: 120px;
-    background-color: #646464; /* Matches #time section */
-}
-
-.section h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-align: center;
-    text-transform: uppercase;
-}
 
 #time-title {
     font-size: 1.5rem;
