@@ -37,23 +37,12 @@ function getCurrentSection() {
     return current;
 }
 
-// Prevent partial scrolling and update header style
+// Enforce scroll-snap behavior
 let isScrolling;
 window.addEventListener('scroll', () => {
     clearTimeout(isScrolling);
     isScrolling = setTimeout(() => {
         const currentSection = getCurrentSection();
         currentSection.scrollIntoView({ behavior: 'smooth' });
-
-        // Update header and section styles
-        const header = document.getElementById('header');
-        const sections = document.querySelectorAll('.section');
-        if (currentSection.id === 'home') {
-            header.classList.remove('slim');
-            sections.forEach(section => section.classList.remove('slim'));
-        } else {
-            header.classList.add('slim');
-            sections.forEach(section => section.classList.add('slim'));
-        }
     }, 150);
 });
