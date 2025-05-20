@@ -100,8 +100,8 @@
     border-radius: 6px;
     transition: background-color 0.3s, transform 0.2s;
     position: absolute;
-    bottom: 100px; /* Positioned just below animation */
-    right: 20px;
+    bottom: 50px; /* Positioned just below animation */
+    right: 80px;
 }
 
 #time-nextYearButton:hover {
@@ -117,8 +117,8 @@
     font-size: 1.2rem;
     font-weight: 500;
     position: absolute;
-    bottom: 100px; /* Aligned with button */
-    left: 50%;
+    bottom: 20px; /* Aligned with button */
+    left: 80%;
     transform: translateX(-50%); /* Center horizontally */
     color: #fff;
 }
