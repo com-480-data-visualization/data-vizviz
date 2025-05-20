@@ -1,3 +1,7 @@
+// Expose functions globally
+window.createBars = createBars;
+window.startAnimation = startAnimation;
+
 document.addEventListener('DOMContentLoaded', function () {
   // Error handling for data loading
   if (typeof pendulaire_4 === 'undefined' || !pendulaire_4 || Object.keys(pendulaire_4).length === 0) {
@@ -6,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
     console.error('pendulaire_4 is undefined or empty. Ensure pendulaire_4.js is loaded correctly.');
     return;
   }
-
 
   // Get years and sort them
   const years = Object.keys(pendulaire_4)
@@ -38,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'External commuting': 'external commuting',
   };
 
-  // Color palette with reds, grays, and blues (unchanged)
+  // Color palette with reds, grays, and blues
   const colors = [
     '#FF6F61', '#EF4444', '#F87171', '#36A2EB', '#4A90E2', '#6BAED6',
     '#1A1A1A', '#666666', '#999999', '#CCCCCC', '#D97706', '#F97316',
@@ -52,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const chartBox = document.getElementById('chartBox');
     const section = document.querySelector('.section');
     const sectionWidth = section ? section.offsetWidth : window.innerWidth;
-    const barCount = 20; // <-- Changé pour 20 au lieu de cantons.length
+    const barCount = 20;
     const barHeight = 30;
     const margin = 5;
     const calculatedHeight = barCount * (barHeight + margin) + 30;
@@ -74,8 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
   let nextYear = years[1] || years[0];
   let maxValue = 0;
   const chartBox = document.getElementById('chartBox');
-  const barHeight = 30; // Match resizeChartBox
-  const margin = 5; // Match resizeChartBox
+  const barHeight = 30;
+  const margin = 5;
   let barElements = {};
 
   // Calculate max value for current metric
@@ -139,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
       })
       .sort((a, b) => b.value - a.value)
-      .slice(0, 20); // <-- Ajoutez cette ligne pour ne garder que les 20 premiers
+      .slice(0, 20);
   }
 
   // Animate transition between years
@@ -232,11 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Initialize
+  // Initialize (render chart without starting animation)
   createBars();
   document.getElementById('yearLabel').textContent = currentYear;
-
-  setTimeout(() => {
-    startAnimation();
-  }, 1000);
 });
