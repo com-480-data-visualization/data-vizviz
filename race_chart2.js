@@ -1,6 +1,8 @@
-// Expose functions globally
-window.createBars = createBars;
-window.startAnimation = startAnimation;
+const chartFunctions = {
+  createBars: null,
+  startAnimation: null
+  // add other functions you need to expose
+};
 
 document.addEventListener('DOMContentLoaded', function () {
   // Error handling for data loading
@@ -201,6 +203,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  chartFunctions.createBars = createBars;
+  chartFunctions.startAnimation = startAnimation;
+
   // Stop animation
   function stopAnimation() {
     isAnimating = false;
@@ -238,4 +243,5 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initialize (render chart without starting animation)
   createBars();
   document.getElementById('yearLabel').textContent = currentYear;
+  startAnimation(); // Add this line to start animation automatically
 });
