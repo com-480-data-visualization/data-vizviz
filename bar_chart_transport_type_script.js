@@ -256,7 +256,7 @@ const pendulaireDataCommuters = {
     // Mettre à jour le titre avec l'année
     const title = document.querySelector('#transport.section h2') || document.querySelector('.section h2');
     if (title) {
-        title.textContent = `Moyens de transport des pendulaires en Suisse (${year})`;
+        title.textContent = `Transport modes used by commuters in Switzerland (${year})`;
     } else {
         console.warn('No title element found for selector #transport.section h2 or .section h2');
     }
