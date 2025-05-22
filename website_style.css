@@ -418,7 +418,7 @@ html {
         transform: translateY(20px);
     }
     to {
-        opacity: 1;
+        opacity: 1 !important; /* Ensure persistence */
         transform: translateY(0);
     }
 }
@@ -437,7 +437,7 @@ html {
     }
 }
 
+/* Remove redundant .visible class */
 .hero-image.visible {
-    opacity: 1;
-    transform: translateY(0);
+    display: none; /* Hide this rule to avoid conflicts */
 }
