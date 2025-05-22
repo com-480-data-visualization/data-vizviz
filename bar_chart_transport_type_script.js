@@ -24,15 +24,15 @@ const pendulaireDataCommuters = {
     ],
     "transport_modes": [
       "Total des pendulaires dont le principal moyen de transport est connu",
-      "à pied",
-      "vélo",
-      "vélo éléctrique",
-      "deux-roues motorisé (sans vélo électrique)",
-      "voiture",
-      "transports publics routiers",
+      "by foot",
+      "bike",
+      "electric bike",
+      "motorized two-wheelers",
+      "car",
+      "public road transport",
       "train",
-      "autres moyens de transport",
-      "Pendulaires dont le principal moyen de transport n'est pas connu"
+      "other transport modes",
+      "Commuters whose main transport mode is unknown"
     ],
     "values": {
       "Total des pendulaires dont le principal moyen de transport est connu": {
@@ -53,7 +53,7 @@ const pendulaireDataCommuters = {
         "2022": { "nombre": 3589840, "pourcentage": 100.0 },
         "2023": { "nombre": 3651882, "pourcentage": 100.0 }
       },
-      "à pied": {
+      "by foot": {
         "1990": { "nombre": 307879, "pourcentage": 10.5 },
         "2000": { "nombre": 264954, "pourcentage": 8.8 },
         "2010": { "nombre": 358838, "pourcentage": 10.0 },
@@ -71,7 +71,7 @@ const pendulaireDataCommuters = {
         "2022": { "nombre": 335479, "pourcentage": 9.3 },
         "2023": { "nombre": 334967, "pourcentage": 9.2 }
       },
-      "vélo": {
+      "bike": {
         "1990": { "nombre": 212781, "pourcentage": 7.3 },
         "2000": { "nombre": 203478, "pourcentage": 6.8 },
         "2010": { "nombre": 216031, "pourcentage": 6.0 },
@@ -89,7 +89,7 @@ const pendulaireDataCommuters = {
         "2022": { "nombre": 248111, "pourcentage": 6.9 },
         "2023": { "nombre": 235278, "pourcentage": 6.4 }
       },
-      "vélo éléctrique": {
+      "electric bike": {
         "1990": { "nombre": null, "pourcentage": null },
         "2000": { "nombre": null, "pourcentage": null },
         "2010": { "nombre": null, "pourcentage": null },
@@ -107,7 +107,7 @@ const pendulaireDataCommuters = {
         "2022": { "nombre": 69610, "pourcentage": 1.9 },
         "2023": { "nombre": 74103, "pourcentage": 2.0 }
       },
-      "deux-roues motorisé (sans vélo électrique)": {
+      "motorized two-wheelers": {
         "1990": { "nombre": 117276, "pourcentage": 4.0 },
         "2000": { "nombre": 88950, "pourcentage": 3.0 },
         "2010": { "nombre": 65770, "pourcentage": 1.8 },
@@ -125,7 +125,7 @@ const pendulaireDataCommuters = {
         "2022": { "nombre": 56105, "pourcentage": 1.6 },
         "2023": { "nombre": 54210, "pourcentage": 1.5 }
       },
-      "voiture": {
+      "car": {
         "1990": { "nombre": 1467084, "pourcentage": 50.1 },
         "2000": { "nombre": 1661987, "pourcentage": 55.4 },
         "2010": { "nombre": 1884456, "pourcentage": 52.4 },
@@ -143,7 +143,7 @@ const pendulaireDataCommuters = {
         "2022": { "nombre": 1810253, "pourcentage": 50.4 },
         "2023": { "nombre": 1820225, "pourcentage": 49.8 }
       },
-      "transports publics routiers": {
+      "public road transport": {
         "1990": { "nombre": 493473, "pourcentage": 16.9 },
         "2000": { "nombre": 416192, "pourcentage": 13.9 },
         "2010": { "nombre": 495821, "pourcentage": 13.8 },
@@ -179,7 +179,7 @@ const pendulaireDataCommuters = {
         "2022": { "nombre": 577813, "pourcentage": 16.1 },
         "2023": { "nombre": 615148, "pourcentage": 16.8 }
       },
-      "autres moyens de transport": {
+      "other transport modes": {
         "1990": { "nombre": 0, "pourcentage": 0.0 },
         "2000": { "nombre": 0, "pourcentage": 0.0 },
         "2010": { "nombre": 7898, "pourcentage": 0.2 },
@@ -197,7 +197,7 @@ const pendulaireDataCommuters = {
         "2022": { "nombre": 19184, "pourcentage": 0.5 },
         "2023": { "nombre": 17968, "pourcentage": 0.5 }
       },
-      "Pendulaires dont le principal moyen de transport n'est pas connu": {
+      "Commuters whose main transport mode is unknown": {
         "1990": { "nombre": 20023, "pourcentage": NaN },
         "2000": { "nombre": 59006, "pourcentage": NaN },
         "2010": { "nombre": 42539, "pourcentage": NaN },
@@ -220,27 +220,27 @@ const pendulaireDataCommuters = {
 
   // Pictogrammes pour chaque mode de transport
   const transportIcons = {
-      "à pied": "🚶",
-      "vélo": "🚲",
-      "vélo éléctrique": "🔋🚲",
-      "deux-roues motorisé (sans vélo électrique)": "🏍",
-      "voiture": "🚗",
-      "transports publics routiers": "🚌",
+      "by foot": "🚶",
+      "bike": "🚲",
+      "electric bike": "🔋🚲",
+      "motorized two-wheelers": "🏍",
+      "car": "🚗",
+      "public road transport": "🚌",
       "train": "🚆",
-      "autres moyens de transport": "❓",
-      "Pendulaires dont le principal moyen de transport n'est pas connu": "�"
+      "other transport modes": "❓",
+      "Commuters whose main transport mode is unknown": "�"
   };
 
   // Couleurs pour les différents modes de transport
   const transportColors = {
-      "à pied": "#3498db",
-      "vélo": "#2ecc71",
-      "vélo éléctrique": "#1abc9c",
-      "deux-roues motorisé (sans vélo électrique)": "#e74c3c",
-      "voiture": "#f39c12",
-      "transports publics routiers": "#9b59b6",
+      "by foot": "#3498db",
+      "bike": "#2ecc71",
+      "electric bike": "#1abc9c",
+      "motorized two-wheelers": "#e74c3c",
+      "car": "#f39c12",
+      "public road transport": "#9b59b6",
       "train": "#34495e",
-      "autres moyens de transport": "#7f8c8d"
+      "other transport modes": "#7f8c8d"
   };
 
   // Fonction pour formater les nombres
@@ -264,7 +264,7 @@ const pendulaireDataCommuters = {
     // Exclure le total et les données non connues
     const displayModes = pendulaireDataCommuters.transport_modes.filter(mode => 
         mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
-        mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
+        mode !== "Commuters whose main transport mode is unknown"
     );
 
     displayModes.forEach(mode => {
@@ -339,7 +339,7 @@ const pendulaireDataCommuters = {
               const maxPercentage = Math.max(...pendulaireDataCommuters.transport_modes
                   .filter(mode => 
                       mode !== "Total des pendulaires dont le principal moyen de transport est connu" && 
-                      mode !== "Pendulaires dont le principal moyen de transport n'est pas connu"
+                      mode !== "Commuters whose main transport mode is unknown"
                   )
                   .map(mode => pendulaireDataCommuters.values[mode][year]?.pourcentage || 0)); // Max percentage for the year
               const fixedWidthPercentage = 15; // Fixed width
@@ -413,7 +413,7 @@ const pendulaireDataCommuters = {
       // Ajouter les options de transport
       pendulaireDataCommuters.transport_modes.forEach(mode => {
           if (mode === "Total des pendulaires dont le principal moyen de transport est connu" || 
-              mode === "Pendulaires dont le principal moyen de transport n'est pas connu") {
+              mode === "Commuters whose main transport mode is unknown") {
               return;
           }
 
