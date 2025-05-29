@@ -27,7 +27,8 @@ The platform features four main visualizations:
 1. **Interactive Commuter Flow Map**: Displays Swiss cities as proportional circles based on commuter volume, with selectable routes.
 2. **Canton Bar Chart Race**: Animates the ranking of cantons by commuter volume over time.
 3. **Transport Mode Comparison**: Shows the distribution of transport modes used by commuters, with filtering options.
-4. **Time-Distance Clock**: Visualizes travel time and distance distributions using a radial clock design.
+4. **Distance Plot**: Visualizes travel distance distributions using an animated bar plot.
+5. **Time Clock**: Visualizes travel time distributions using a radial clock design.
 
 The project is hosted on [GitHub Pages](https://com-480-data-visualization.github.io/data-vizviz/) for easy access.
 
