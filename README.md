@@ -16,6 +16,9 @@
 
 A web-based data visualization project for exploring commuter mobility patterns in Switzerland, built as part of the COM-480 Data Visualization course. The project uses datasets from the Swiss Federal Statistical Office (OFS) to create interactive visualizations, including a commuter flow map, a canton bar chart race, a transport mode comparison, and a time-distance clock.
 
+**➡️ [Live Website](https://com-480-data-visualization.github.io/data-vizviz/)**  
+**🎥 [Watch Demo on YouTube](https://www.youtube.com/watch?v=l_0hukL3RVo&ab_channel=SwissPendulum)**
+
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Technical Setup](#technical-setup)
@@ -27,8 +30,6 @@ A web-based data visualization project for exploring commuter mobility patterns 
   - [Interacting with Visualizations](#interacting-with-visualizations)
 - [Dependencies](#dependencies)
 - [Data Sources](#data-sources)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
 The Swiss Pendulum project visualizes commuter mobility across Switzerland, focusing on:
@@ -144,15 +145,5 @@ The visualizations use preprocessed JSON files derived from the Swiss Federal St
 - Additional datasets for journey types and municipality-level flows.
 
 Data is stored in the `datasets/` folder as JSON files for fast client-side loading.
-
-## Contributing
-Contributions are welcome! To contribute:
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/your-feature`).
-3. Commit changes (`git commit -m 'Add your feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a pull request.
-
-Please ensure code follows the existing style (e.g., ES6 for JavaScript, consistent CSS formatting) and test locally before submitting.
 
 
