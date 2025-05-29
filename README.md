@@ -1,13 +1,17 @@
 # Project of Data Visualization (COM-480)
 
-# Swiss Pendulum
-
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Romain Lattion | 347395 |
 | Jadd-Ilyes Ali Larbi | 327250 |
 | Corentin Barut | 329702 |
 
+<p align="center">
+  <figure>
+    <img src="../img/swisspendulum.png" width="100%" alt="" />
+    <figcaption>Breakdown of means of transport to work in 2023 </figcaption>
+  </figure>
+</p>
 
 # Swiss Pendulum
 
@@ -77,6 +81,7 @@ data-vizviz/
 ├── datasets/                     # Preprocessed JSON data files
 │   ├── pendulaire_2_js_v3.js     # Transport mode data
 │   ├── pendulaire_4.js           # Commuter data per canton
+│   ...                           # Other datasets
 ├── img/                          # Image assets for visualizations
 ├── bar_chart_transport_type_script.js  # Transport mode comparison logic
 ├── bar_chart_transport_type_style.css # Transport mode comparison styles
