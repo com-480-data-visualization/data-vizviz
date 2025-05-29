@@ -26,7 +26,7 @@ A web-based data visualization project for exploring commuter mobility patterns 
   - [Installation](#installation)
   - [File Structure](#file-structure)
 - [Usage](#usage)
-  - [Running the Application](#running-the-application)
+  - [Running the Web Site](#running-the-web-site)
   - [Interacting with Visualizations](#interacting-with-visualizations)
 - [Dependencies](#dependencies)
 - [Data Sources](#data-sources)
@@ -101,7 +101,7 @@ data-vizviz/
 
 ## Usage
 
-### Running the Application
+### Running the Web Site
 1. Access the live demo at [https://com-480-data-visualization.github.io/data-vizviz/](https://com-480-data-visualization.github.io/data-vizviz/).
 2. Alternatively, run locally by following the [Installation](#installation) steps.
 3. Navigate through sections (Home, Map, Commuters, Transport, Time, Distance) using the header navigation or scroll arrows.
