@@ -43,7 +43,7 @@ An interactive map displaying Swiss cities as dots, with dot radius proportional
 
 <p align="center">
   <figure>
-    <img src="img/Maps-1-dots.jpg" width="50%" alt="" />
+    <img src="../img/Maps-1-dots.jpg" width="50%" alt="" />
   </figure>
 </p>
 
@@ -67,7 +67,7 @@ A dynamic “bar chart race” visualizing the ranking of cantons by total commu
 
 <p align="center">
   <figure>
-    <img src="img/Race Chart.jpg" width="50%" alt="" />
+    <img src="../img/Race Chart.jpg" width="50%" alt="" />
   </figure>
 </p>
 
@@ -90,7 +90,7 @@ A bar chart displaying the distribution of transport modes (e.g., car, train, bi
 
 <p align="center">
   <figure>
-    <img src="img/Transport modes comparaison.jpg" width="50%" alt="" />
+    <img src="../img/Transport modes comparaison.jpg" width="50%" alt="" />
   </figure>
 </p>
 
@@ -114,7 +114,7 @@ A clock-based visualization representing commuter travel time and distance, usin
 
 <p align="center">
   <figure>
-    <img src="img/Time Distance.jpg" width="50%" alt="" />
+    <img src="../img/Time Distance.jpg" width="50%" alt="" />
   </figure>
 </p>
 
