@@ -8,8 +8,7 @@
 
 <p align="center">
   <figure>
-    <img src="../img/swisspendulum.png" width="100%" alt="" />
-    <figcaption>Breakdown of means of transport to work in 2023 </figcaption>
+    <img src="img/swisspendulum2.png" width="100%" alt="" />
   </figure>
 </p>
 
