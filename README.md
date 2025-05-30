@@ -97,6 +97,7 @@ data-vizviz/
 ├── website_style.css             # Core website styles
 ├── index.html                    # Main HTML file
 ├── README.md                     # This file
+├── Process Book                  # Describes how the project was carried out
 ```
 
 ## Usage
